@@ -36,4 +36,350 @@
                     <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button id="lan
+                    <button id="language-toggle" class="text-sm font-medium">EN</button>
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 pt-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    <span class="ja-content">河野聖</span>
+                    <span class="en-content hidden">Masaki Kono</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 font-light">
+                    <span class="ja-content">プロフェッショナル・スペシャリスト</span>
+                    <span class="en-content hidden">Professional Specialist</span>
+                </p>
+                <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10">
+                    <span class="ja-content">革新的なソリューションと卓越したサービスを通じて、お客様の成功をサポートします。</span>
+                    <span class="en-content hidden">Supporting client success through innovative solutions and exceptional service.</span>
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#about" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                        <span class="ja-content">詳しく見る</span>
+                        <span class="en-content hidden">Learn More</span>
+                    </a>
+                    <a href="#contact" class="border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 px-8 py-3 rounded-lg font-medium transition-colors">
+                        <span class="ja-content">お問い合わせ</span>
+                        <span class="en-content hidden">Contact</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">
+                    <span class="ja-content">私について</span>
+                    <span class="en-content hidden">About Me</span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <span class="ja-content">経験と情熱を持って、お客様のニーズに応える専門的なサービスを提供しています。</span>
+                    <span class="en-content hidden">Providing professional services with experience and passion to meet client needs.</span>
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-8">
+                        <h3 class="text-2xl font-semibold mb-4">
+                            <span class="ja-content">プロフィール</span>
+                            <span class="en-content hidden">Profile</span>
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            <span class="ja-content">多様な分野での豊富な経験を活かし、クライアントの課題解決に取り組んでいます。常に学び続け、最新の知識とスキルを身につけることで、質の高いサービスを提供することを心がけています。</span>
+                            <span class="en-content hidden">Leveraging extensive experience across various fields to solve client challenges. Committed to continuous learning and acquiring the latest knowledge and skills to provide high-quality services.</span>
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <span class="font-medium w-20">
+                                    <span class="ja-content">名前:</span>
+                                    <span class="en-content hidden">Name:</span>
+                                </span>
+                                <span>河野聖 (Masaki Kono)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium w-20">
+                                    <span class="ja-content">拠点:</span>
+                                    <span class="en-content hidden">Location:</span>
+                                </span>
+                                <span>
+                                    <span class="ja-content">日本</span>
+                                    <span class="en-content hidden">Japan</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6">
+                            <h4 class="font-semibold text-lg mb-2">
+                                <span class="ja-content">専門性</span>
+                                <span class="en-content hidden">Expertise</span>
+                            </h4>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                <span class="ja-content">幅広い分野での専門知識と実践経験</span>
+                                <span class="en-content hidden">Specialized knowledge and practical experience across diverse fields</span>
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6">
+                            <h4 class="font-semibold text-lg mb-2">
+                                <span class="ja-content">品質へのこだわり</span>
+                                <span class="en-content hidden">Quality Focus</span>
+                            </h4>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                <span class="ja-content">細部まで妥協しない高品質なサービス提供</span>
+                                <span class="en-content hidden">Uncompromising high-quality service delivery with attention to detail</span>
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-r from-green-50 to-teal-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6">
+                            <h4 class="font-semibold text-lg mb-2">
+                                <span class="ja-content">コミュニケーション</span>
+                                <span class="en-content hidden">Communication</span>
+                            </h4>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                <span class="ja-content">クライアントとの密接な連携と透明性</span>
+                                <span class="en-content hidden">Close collaboration and transparency with clients</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">
+                    <span class="ja-content">スキル</span>
+                    <span class="en-content hidden">Skills</span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <span class="ja-content">多様な分野での専門知識と実践的なスキルを身につけています。</span>
+                    <span class="en-content hidden">Possessing specialized knowledge and practical skills across various fields.</span>
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span class="ja-content">問題解決</span>
+                        <span class="en-content hidden">Problem Solving</span>
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        <span class="ja-content">複雑な課題を分析し、効果的なソリューションを提供</span>
+                        <span class="en-content hidden">Analyzing complex challenges and providing effective solutions</span>
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span class="ja-content">チームワーク</span>
+                        <span class="en-content hidden">Teamwork</span>
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        <span class="ja-content">多様なチームでの協働と効果的なコミュニケーション</span>
+                        <span class="en-content hidden">Collaboration in diverse teams and effective communication</span>
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span class="ja-content">適応力</span>
+                        <span class="en-content hidden">Adaptability</span>
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        <span class="ja-content">変化する環境への迅速な対応と柔軟性</span>
+                        <span class="en-content hidden">Quick response to changing environments and flexibility</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">
+                    <span class="ja-content">経験</span>
+                    <span class="en-content hidden">Experience</span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <span class="ja-content">様々なプロジェクトや役割を通じて培った豊富な経験をご紹介します。</span>
+                    <span class="en-content hidden">Showcasing extensive experience gained through various projects and roles.</span>
+                </p>
+            </div>
+            <div class="space-y-8">
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-8">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                        <h3 class="text-2xl font-semibold">
+                            <span class="ja-content">プロフェッショナル活動</span>
+                            <span class="en-content hidden">Professional Activities</span>
+                        </h3>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">
+                            <span class="ja-content">継続中</span>
+                            <span class="en-content hidden">Ongoing</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        <span class="ja-content">多様な分野でのプロフェッショナルとしての活動を通じて、クライアントのニーズに応える高品質なサービスを提供しています。</span>
+                        <span class="en-content hidden">Providing high-quality services that meet client needs through professional activities across various fields.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
+                            <span class="ja-content">専門サービス</span>
+                            <span class="en-content hidden">Professional Services</span>
+                        </span>
+                        <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
+                            <span class="ja-content">クライアント対応</span>
+                            <span class="en-content hidden">Client Relations</span>
+                        </span>
+                        <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
+                            <span class="ja-content">品質管理</span>
+                            <span class="en-content hidden">Quality Management</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">
+                    <span class="ja-content">お問い合わせ</span>
+                    <span class="en-content hidden">Contact</span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <span class="ja-content">ご質問やご相談がございましたら、お気軽にお問い合わせください。</span>
+                    <span class="en-content hidden">Please feel free to contact me with any questions or consultations.</span>
+                </p>
+            </div>
+            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">
+                            <span class="ja-content">連絡先情報</span>
+                            <span class="en-content hidden">Contact Information</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">
+                                        <span class="ja-content">メール</span>
+                                        <span class="en-content hidden">Email</span>
+                                    </p>
+                                    <p class="text-gray-600 dark:text-gray-400">contact@masakikono.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">
+                                        <span class="ja-content">所在地</span>
+                                        <span class="en-content hidden">Location</span>
+                                    </p>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        <span class="ja-content">日本</span>
+                                        <span class="en-content hidden">Japan</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">
+                            <span class="ja-content">メッセージをお送りください</span>
+                            <span class="en-content hidden">Send a Message</span>
+                        </h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">
+                                    <span class="ja-content">お名前</span>
+                                    <span class="en-content hidden">Name</span>
+                                </label>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">
+                                    <span class="ja-content">メールアドレス</span>
+                                    <span class="en-content hidden">Email</span>
+                                </label>
+                                <input type="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">
+                                    <span class="ja-content">メッセージ</span>
+                                    <span class="en-content hidden">Message</span>
+                                </label>
+                                <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                                <span class="ja-content">送信</span>
+                                <span class="en-content hidden">Send</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-600 dark:text-gray-400">
+                    © 2024 河野聖 (Masaki Kono). 
+                    <span class="ja-content">All rights reserved.</span>
+                    <span class="en-content hidden">All rights reserved.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
