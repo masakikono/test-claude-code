@@ -134,6 +134,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
+            flex-wrap: nowrap;
         }
 
         .logo {
@@ -913,6 +915,347 @@
             z-index: 9998;
             transition: all 0.1s ease;
         }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .login-btn, .register-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--silver);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-btn:hover, .register-btn:hover {
+            background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .register-btn {
+            background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+            border-color: var(--navy-accent);
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(45deg, var(--silver), var(--navy-accent));
+            box-shadow: 0 5px 15px rgba(192, 192, 192, 0.4);
+        }
+
+        /* User Menu */
+        .user-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: nowrap;
+            min-width: 0;
+        }
+
+        .user-name {
+            color: var(--silver);
+            font-weight: 600;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            flex-shrink: 0;
+        }
+
+        .mypage-btn, .logout-btn {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--silver);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .mypage-btn:hover {
+            background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .logout-btn:hover {
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--primary-navy), var(--secondary-navy));
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header p {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .close:hover {
+            color: var(--silver);
+            transform: scale(1.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--silver);
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--navy-accent);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-submit {
+            background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif JP', serif;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+        }
+
+        .form-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .form-link a {
+            color: var(--navy-accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .form-link a:hover {
+            color: var(--silver);
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            color: #10b981;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Mypage specific styles */
+        .user-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-info h3 {
+            color: var(--silver);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .user-info p {
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .user-info strong {
+            color: var(--navy-accent);
+        }
+
+        /* Responsive Design for Auth */
+        @media (max-width: 768px) {
+            .auth-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .user-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .user-name {
+                max-width: 120px;
+                font-size: 1rem;
+            }
+            
+            .mypage-btn, .logout-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 2rem;
+            }
+            
+            .modal-header h2 {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Additional responsive breakpoint for narrow screens */
+        @media (max-width: 480px) {
+            .user-menu {
+                gap: 0.3rem;
+            }
+            
+            .user-name {
+                max-width: 100px;
+                font-size: 0.9rem;
+            }
+            
+            .mypage-btn, .logout-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -949,6 +1292,15 @@
                         <li><a href="#contact">お問い合わせ</a></li>
                     </ul>
                 </nav>
+                <div class="auth-buttons" id="authButtons">
+                    <button class="login-btn" onclick="openLoginModal()">ログイン</button>
+                    <button class="register-btn" onclick="openRegisterModal()">新規登録</button>
+                </div>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <span class="user-name" id="userName">○○さん</span>
+                    <button class="mypage-btn" onclick="openMypageModal()">マイページ</button>
+                    <button class="logout-btn" onclick="logout()">ログアウト</button>
+                </div>
             </div>
         </div>
     </header>
@@ -1116,6 +1468,88 @@
             <p>&copy; 2024 KONO KAFFE. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <div class="modal-header">
+                <h2>ログイン</h2>
+                <p>アカウントにログインしてください</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">メールアドレス</label>
+                    <input type="email" id="loginEmail" name="email" placeholder="example@email.com" required>
+                    <div class="error-message" id="loginEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">パスワード</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="パスワードを入力" required>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+                <button type="submit" class="form-submit">ログイン</button>
+                <div class="form-link">
+                    <a href="#" onclick="switchToRegister()">新規登録はこちら</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <div class="modal-header">
+                <h2>新規登録</h2>
+                <p>アカウントを作成してください</p>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">お名前</label>
+                    <input type="text" id="registerName" name="name" placeholder="山田太郎" required>
+                    <div class="error-message" id="registerNameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">メールアドレス</label>
+                    <input type="email" id="registerEmail" name="email" placeholder="example@email.com" required>
+                    <div class="error-message" id="registerEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">パスワード</label>
+                    <input type="password" id="registerPassword" name="password" placeholder="8文字以上で入力" required>
+                    <div class="error-message" id="registerPasswordError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">パスワード確認</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" placeholder="パスワードを再入力" required>
+                    <div class="error-message" id="registerConfirmPasswordError"></div>
+                </div>
+                <button type="submit" class="form-submit">新規登録</button>
+                <div class="form-link">
+                    <a href="#" onclick="switchToLogin()">既にアカウントをお持ちの方</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mypage Modal -->
+    <div id="mypageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('mypageModal')">&times;</span>
+            <div class="modal-header">
+                <h2>マイページ</h2>
+                <p>アカウント情報</p>
+            </div>
+            <div class="user-info">
+                <h3>会員情報</h3>
+                <p><strong>お名前:</strong> <span id="mypageName"></span></p>
+                <p><strong>メールアドレス:</strong> <span id="mypageEmail"></span></p>
+                <p><strong>登録日:</strong> <span id="mypageRegistered"></span></p>
+            </div>
+            <button class="form-submit" onclick="logout()" style="background: linear-gradient(45deg, #dc2626, #ef4444);">ログアウト</button>
+        </div>
+    </div>
 
     <script>
         // Enhanced Loading Screen
@@ -1548,6 +1982,335 @@
                 }
             });
         }
+
+        // Member System
+        const memberSystem = {
+            // LocalStorage keys
+            USERS_KEY: 'kono_kaffe_users',
+            CURRENT_USER_KEY: 'kono_kaffe_current_user',
+            
+            // Initialize users array if not exists
+            initializeUsers() {
+                if (!localStorage.getItem(this.USERS_KEY)) {
+                    localStorage.setItem(this.USERS_KEY, JSON.stringify([]));
+                }
+            },
+            
+            // Get all users
+            getUsers() {
+                return JSON.parse(localStorage.getItem(this.USERS_KEY) || '[]');
+            },
+            
+            // Save users
+            saveUsers(users) {
+                localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+            },
+            
+            // Register new user
+            register(userData) {
+                this.initializeUsers();
+                const users = this.getUsers();
+                
+                // Check if email already exists
+                if (users.find(user => user.email === userData.email)) {
+                    throw new Error('このメールアドレスは既に登録されています');
+                }
+                
+                // Create new user
+                const newUser = {
+                    id: Date.now().toString(),
+                    name: userData.name,
+                    email: userData.email,
+                    password: userData.password, // In real app, this should be hashed
+                    registeredAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                this.saveUsers(users);
+                
+                return newUser;
+            },
+            
+            // Login user
+            login(email, password) {
+                const users = this.getUsers();
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (!user) {
+                    throw new Error('メールアドレスまたはパスワードが間違っています');
+                }
+                
+                // Set current user
+                localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(user));
+                return user;
+            },
+            
+            // Get current user
+            getCurrentUser() {
+                const userStr = localStorage.getItem(this.CURRENT_USER_KEY);
+                return userStr ? JSON.parse(userStr) : null;
+            },
+            
+            // Logout
+            logout() {
+                localStorage.removeItem(this.CURRENT_USER_KEY);
+            },
+            
+            // Check if user is logged in
+            isLoggedIn() {
+                return this.getCurrentUser() !== null;
+            }
+        };
+
+        // Validation functions
+        const validation = {
+            email(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            },
+            
+            password(password) {
+                return password.length >= 8;
+            },
+            
+            name(name) {
+                return name.trim().length >= 2;
+            }
+        };
+
+        // Modal functions
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openMypageModal() {
+            const user = memberSystem.getCurrentUser();
+            if (user) {
+                document.getElementById('mypageName').textContent = user.name;
+                document.getElementById('mypageEmail').textContent = user.email;
+                document.getElementById('mypageRegistered').textContent = new Date(user.registeredAt).toLocaleDateString('ja-JP');
+                document.getElementById('mypageModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+            clearErrors();
+        }
+
+        function switchToLogin() {
+            closeModal('registerModal');
+            openLoginModal();
+        }
+
+        function switchToRegister() {
+            closeModal('loginModal');
+            openRegisterModal();
+        }
+
+        // Error handling
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(element => {
+                element.style.display = 'none';
+                element.textContent = '';
+            });
+        }
+
+        // Login form handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    clearErrors();
+                    
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    
+                    // Validation
+                    let hasError = false;
+                    
+                    if (!validation.email(email)) {
+                        showError('loginEmailError', '有効なメールアドレスを入力してください');
+                        hasError = true;
+                    }
+                    
+                    if (!validation.password(password)) {
+                        showError('loginPasswordError', 'パスワードは8文字以上で入力してください');
+                        hasError = true;
+                    }
+                    
+                    if (hasError) return;
+                    
+                    // Try to login
+                    try {
+                        memberSystem.login(email, password);
+                        closeModal('loginModal');
+                        updateAuthUI();
+                        showWelcomeMessage();
+                    } catch (error) {
+                        showError('loginPasswordError', error.message);
+                    }
+                });
+            }
+        });
+
+        // Register form handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    clearErrors();
+                    
+                    const name = document.getElementById('registerName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const password = document.getElementById('registerPassword').value;
+                    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                    
+                    // Validation
+                    let hasError = false;
+                    
+                    if (!validation.name(name)) {
+                        showError('registerNameError', '名前は2文字以上で入力してください');
+                        hasError = true;
+                    }
+                    
+                    if (!validation.email(email)) {
+                        showError('registerEmailError', '有効なメールアドレスを入力してください');
+                        hasError = true;
+                    }
+                    
+                    if (!validation.password(password)) {
+                        showError('registerPasswordError', 'パスワードは8文字以上で入力してください');
+                        hasError = true;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        showError('registerConfirmPasswordError', 'パスワードが一致しません');
+                        hasError = true;
+                    }
+                    
+                    if (hasError) return;
+                    
+                    // Try to register
+                    try {
+                        memberSystem.register({ name, email, password });
+                        memberSystem.login(email, password);
+                        closeModal('registerModal');
+                        updateAuthUI();
+                        showWelcomeMessage();
+                    } catch (error) {
+                        showError('registerEmailError', error.message);
+                    }
+                });
+            }
+        });
+
+        // Logout function
+        function logout() {
+            memberSystem.logout();
+            updateAuthUI();
+            closeModal('mypageModal');
+            
+            // Show logout message
+            const logoutMessage = document.createElement('div');
+            logoutMessage.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+                color: white;
+                padding: 2rem;
+                border-radius: 10px;
+                z-index: 10001;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            `;
+            logoutMessage.innerHTML = '<p>ログアウトしました</p>';
+            document.body.appendChild(logoutMessage);
+            
+            setTimeout(() => {
+                logoutMessage.remove();
+            }, 2000);
+        }
+
+        // Update auth UI based on login status
+        function updateAuthUI() {
+            const user = memberSystem.getCurrentUser();
+            const authButtons = document.getElementById('authButtons');
+            const userMenu = document.getElementById('userMenu');
+            const userName = document.getElementById('userName');
+            
+            if (user) {
+                // User is logged in
+                authButtons.style.display = 'none';
+                userMenu.style.display = 'flex';
+                userName.textContent = user.name + 'さん';
+            } else {
+                // User is not logged in
+                authButtons.style.display = 'flex';
+                userMenu.style.display = 'none';
+            }
+        }
+
+        // Show welcome message
+        function showWelcomeMessage() {
+            const user = memberSystem.getCurrentUser();
+            if (user) {
+                const welcomeMessage = document.createElement('div');
+                welcomeMessage.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+                    color: white;
+                    padding: 2rem;
+                    border-radius: 10px;
+                    z-index: 10001;
+                    text-align: center;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                `;
+                welcomeMessage.innerHTML = `<p>ようこそ、${user.name}さん！</p>`;
+                document.body.appendChild(welcomeMessage);
+                
+                setTimeout(() => {
+                    welcomeMessage.remove();
+                }, 2000);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        // Initialize auth UI on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAuthUI();
+        });
     </script>
 </body>
 </html>
