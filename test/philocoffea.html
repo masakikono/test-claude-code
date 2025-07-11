@@ -952,6 +952,590 @@
             box-shadow: 0 5px 15px rgba(192, 192, 192, 0.4);
         }
 
+        /* Cart Icon Styles */
+        .cart-container {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .cart-icon {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--silver);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cart-icon:hover {
+            background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .cart-symbol {
+            font-size: 1.5rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .cart-count:empty {
+            display: none;
+        }
+
+        /* Add to Cart Button */
+        .product-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .detail-btn {
+            background: var(--primary-black);
+            color: var(--white);
+            border: 2px solid var(--dark-gray);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif JP', serif;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .detail-btn:hover {
+            background: linear-gradient(45deg, var(--light-navy), var(--silver));
+            border-color: var(--navy-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(192, 192, 192, 0.3);
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif JP', serif;
+            flex: 2;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .add-to-cart-btn:active {
+            transform: translateY(0);
+        }
+
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .add-to-cart-btn:hover::before {
+            left: 100%;
+        }
+
+        .add-to-cart-btn.added {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            transform: scale(0.95);
+        }
+
+        .add-to-cart-btn.added::after {
+            content: '✓';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            animation: checkmark 0.5s ease-in-out;
+        }
+
+        @keyframes checkmark {
+            0% {
+                opacity: 0;
+                transform: translateY(-50%) scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1);
+            }
+        }
+
+        /* Cart Modal Styles */
+        .cart-modal-content {
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-content {
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 2rem 0;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem;
+            color: var(--light-gray);
+        }
+
+        .cart-empty p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-item-info h4 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cart-item-info p {
+            color: var(--light-gray);
+            font-size: 1rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .qty-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover:not(:disabled) {
+            background: var(--navy-accent);
+            border-color: var(--navy-accent);
+            transform: scale(1.1);
+        }
+
+        .qty-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .qty-display {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            color: var(--white);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .cart-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        .cart-total-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cart-total {
+            font-size: 1.5rem;
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .clear-cart-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 2px solid var(--light-gray);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .clear-cart-btn:hover {
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            border-color: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .checkout-btn {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Responsive Cart Modal */
+        @media (max-width: 768px) {
+            .cart-modal-content {
+                margin: 2% auto;
+                width: 95%;
+                max-height: 90vh;
+            }
+            
+            .cart-total-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .cart-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .clear-cart-btn,
+            .checkout-btn {
+                flex: 1;
+            }
+        }
+
+        /* Product Detail Modal Styles */
+        .product-detail-modal {
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .product-detail-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .product-detail-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-detail-header .price {
+            font-size: 1.8rem;
+            color: var(--navy-accent);
+            font-weight: bold;
+        }
+
+        .product-detail-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-image-large {
+            background: linear-gradient(135deg, var(--primary-navy), var(--dark-navy));
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-info-detail {
+            color: var(--white);
+        }
+
+        .product-info-detail h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--silver);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .product-info-detail p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .taste-profile {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .taste-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .taste-item .taste-label {
+            font-weight: bold;
+            color: var(--silver);
+            margin-bottom: 0.5rem;
+        }
+
+        .taste-level {
+            display: flex;
+            justify-content: center;
+            gap: 0.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .taste-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .taste-dot.active {
+            background: var(--navy-accent);
+        }
+
+        .brewing-methods {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .brewing-methods h4 {
+            color: var(--silver);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brewing-methods ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .brewing-methods li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brewing-methods li:last-child {
+            border-bottom: none;
+        }
+
+        .brewing-methods li::before {
+            content: '☕';
+            margin-right: 0.5rem;
+        }
+
+        .product-detail-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .detail-add-to-cart {
+            background: linear-gradient(45deg, var(--navy-accent), var(--silver));
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif JP', serif;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .detail-add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .back-to-products {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 2px solid var(--silver);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif JP', serif;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-to-products:hover {
+            background: linear-gradient(45deg, var(--light-navy), var(--silver));
+            border-color: var(--navy-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Product Detail */
+        @media (max-width: 768px) {
+            .product-detail-modal {
+                margin: 2% auto;
+                width: 95%;
+                max-height: 95vh;
+            }
+            
+            .product-detail-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-detail-header h2 {
+                font-size: 2rem;
+            }
+            
+            .taste-profile {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-detail-actions {
+                flex-direction: column;
+            }
+        }
+
         /* User Menu */
         .user-menu {
             display: flex;
@@ -1292,6 +1876,12 @@
                         <li><a href="#contact">お問い合わせ</a></li>
                     </ul>
                 </nav>
+                <div class="cart-container">
+                    <div class="cart-icon" onclick="openCartModal()">
+                        <span class="cart-symbol">🛒</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
                 <div class="auth-buttons" id="authButtons">
                     <button class="login-btn" onclick="openLoginModal()">ログイン</button>
                     <button class="register-btn" onclick="openRegisterModal()">新規登録</button>
@@ -1374,6 +1964,10 @@
                         <h3 class="product-title">エチオピア イルガチェフェ</h3>
                         <p class="product-origin">産地：エチオピア | 焙煎：ライト</p>
                         <p class="product-price">¥1,200</p>
+                        <div class="product-buttons">
+                            <button class="detail-btn" onclick="showProductDetail('ethiopia')">豆の詳細</button>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)" data-name="エチオピア イルガチェフェ" data-price="1200" data-image="エチオピアイルガチェフェ">カートに追加</button>
+                        </div>
                     </div>
                 </div>
                 <div class="product-card" data-roast="medium" data-price="1080" data-name="コロンビア ウイラ">
@@ -1384,6 +1978,10 @@
                         <h3 class="product-title">コロンビア ウイラ</h3>
                         <p class="product-origin">産地：コロンビア | 焙煎：ミディアム</p>
                         <p class="product-price">¥1,080</p>
+                        <div class="product-buttons">
+                            <button class="detail-btn" onclick="showProductDetail('colombia')">豆の詳細</button>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)" data-name="コロンビア ウイラ" data-price="1080" data-image="コロンビアウイラ">カートに追加</button>
+                        </div>
                     </div>
                 </div>
                 <div class="product-card" data-roast="light" data-price="1350" data-name="ルワンダ ムサンゼ">
@@ -1394,6 +1992,10 @@
                         <h3 class="product-title">ルワンダ ムサンゼ</h3>
                         <p class="product-origin">産地：ルワンダ | 焙煎：ライト</p>
                         <p class="product-price">¥1,350</p>
+                        <div class="product-buttons">
+                            <button class="detail-btn" onclick="showProductDetail('rwanda')">豆の詳細</button>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)" data-name="ルワンダ ムサンゼ" data-price="1350" data-image="ルワンダムサンゼ">カートに追加</button>
+                        </div>
                     </div>
                 </div>
                 <div class="product-card" data-roast="dark" data-price="950" data-name="ブラジル セラード">
@@ -1404,6 +2006,10 @@
                         <h3 class="product-title">ブラジル セラード</h3>
                         <p class="product-origin">産地：ブラジル | 焙煎：ダーク</p>
                         <p class="product-price">¥950</p>
+                        <div class="product-buttons">
+                            <button class="detail-btn" onclick="showProductDetail('brazil')">豆の詳細</button>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)" data-name="ブラジル セラード" data-price="950" data-image="ブラジルセラード">カートに追加</button>
+                        </div>
                     </div>
                 </div>
                 <div class="product-card" data-roast="medium" data-price="1180" data-name="グアテマラ アンティグア">
@@ -1414,6 +2020,10 @@
                         <h3 class="product-title">グアテマラ アンティグア</h3>
                         <p class="product-origin">産地：グアテマラ | 焙煎：ミディアム</p>
                         <p class="product-price">¥1,180</p>
+                        <div class="product-buttons">
+                            <button class="detail-btn" onclick="showProductDetail('guatemala')">豆の詳細</button>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)" data-name="グアテマラ アンティグア" data-price="1180" data-image="グアテマラアンティグア">カートに追加</button>
+                        </div>
                     </div>
                 </div>
                 <div class="product-card" data-roast="medium" data-price="1450" data-name="ケニア AA">
@@ -1424,6 +2034,10 @@
                         <h3 class="product-title">ケニア AA</h3>
                         <p class="product-origin">産地：ケニア | 焙煎：ミディアム</p>
                         <p class="product-price">¥1,450</p>
+                        <div class="product-buttons">
+                            <button class="detail-btn" onclick="showProductDetail('kenya')">豆の詳細</button>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)" data-name="ケニア AA" data-price="1450" data-image="ケニアAA">カートに追加</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1548,6 +2162,50 @@
                 <p><strong>登録日:</strong> <span id="mypageRegistered"></span></p>
             </div>
             <button class="form-submit" onclick="logout()" style="background: linear-gradient(45deg, #dc2626, #ef4444);">ログアウト</button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-modal-content">
+            <span class="close" onclick="closeModal('cartModal')">&times;</span>
+            <div class="modal-header">
+                <h2>🛒 ショッピングカート</h2>
+                <p>選んだ商品を確認してください</p>
+            </div>
+            
+            <div class="cart-content">
+                <div id="cartEmpty" class="cart-empty">
+                    <p>カートが空です</p>
+                    <p>お気に入りのコーヒーを選んでください</p>
+                </div>
+                
+                <div id="cartItems" class="cart-items">
+                    <!-- Cart items will be populated here -->
+                </div>
+            </div>
+            
+            <div class="cart-footer">
+                <div class="cart-total-section">
+                    <div class="cart-total">
+                        <strong>合計: <span id="cartTotal">¥0</span></strong>
+                    </div>
+                    <div class="cart-actions">
+                        <button class="clear-cart-btn" onclick="clearCart()">カートを空にする</button>
+                        <button class="checkout-btn" onclick="checkout()">注文する</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productDetailModal" class="modal">
+        <div class="modal-content product-detail-modal">
+            <span class="close" onclick="closeModal('productDetailModal')">&times;</span>
+            <div id="productDetailContent">
+                <!-- Product detail content will be populated here -->
+            </div>
         </div>
     </div>
 
@@ -2310,6 +2968,579 @@
         // Initialize auth UI on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateAuthUI();
+            cartSystem.initialize();
+        });
+
+        // Shopping Cart System
+        const cartSystem = {
+            CART_KEY: 'kono_kaffe_cart',
+            cart: [],
+            
+            // Initialize cart system
+            initialize() {
+                this.loadCart();
+                this.updateCartDisplay();
+            },
+            
+            // Load cart from localStorage
+            loadCart() {
+                const savedCart = localStorage.getItem(this.CART_KEY);
+                if (savedCart) {
+                    this.cart = JSON.parse(savedCart);
+                }
+            },
+            
+            // Save cart to localStorage
+            saveCart() {
+                localStorage.setItem(this.CART_KEY, JSON.stringify(this.cart));
+            },
+            
+            // Add item to cart
+            addItem(item) {
+                const existingItem = this.cart.find(cartItem => cartItem.name === item.name);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    this.cart.push({
+                        id: Date.now().toString(),
+                        name: item.name,
+                        price: parseInt(item.price),
+                        image: item.image,
+                        quantity: 1
+                    });
+                }
+                
+                this.saveCart();
+                this.updateCartDisplay();
+                this.showAddToCartAnimation(item);
+            },
+            
+            // Remove item from cart
+            removeItem(itemId) {
+                this.cart = this.cart.filter(item => item.id !== itemId);
+                this.saveCart();
+                this.updateCartDisplay();
+                this.updateCartModal();
+            },
+            
+            // Update item quantity
+            updateQuantity(itemId, newQuantity) {
+                const item = this.cart.find(item => item.id === itemId);
+                if (item) {
+                    if (newQuantity <= 0) {
+                        this.removeItem(itemId);
+                    } else {
+                        item.quantity = newQuantity;
+                        this.saveCart();
+                        this.updateCartDisplay();
+                        this.updateCartModal();
+                    }
+                }
+            },
+            
+            // Get cart total
+            getTotal() {
+                return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            },
+            
+            // Get cart item count
+            getItemCount() {
+                return this.cart.reduce((count, item) => count + item.quantity, 0);
+            },
+            
+            // Update cart display (counter)
+            updateCartDisplay() {
+                const cartCount = document.getElementById('cartCount');
+                const count = this.getItemCount();
+                
+                if (count > 0) {
+                    cartCount.textContent = count;
+                    cartCount.style.display = 'flex';
+                } else {
+                    cartCount.textContent = '';
+                    cartCount.style.display = 'none';
+                }
+            },
+            
+            // Show add to cart animation
+            showAddToCartAnimation(item) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(45deg, #10b981, #34d399);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 10px;
+                    z-index: 10001;
+                    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+                    animation: slideInRight 0.3s ease-out;
+                `;
+                notification.innerHTML = `
+                    <p><strong>${item.name}</strong> をカートに追加しました！</p>
+                    <p>合計: ${this.getItemCount()}個 (¥${this.getTotal().toLocaleString()})</p>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutRight 0.3s ease-in';
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 3000);
+            },
+            
+            // Update cart modal content
+            updateCartModal() {
+                const cartItemsContainer = document.getElementById('cartItems');
+                const cartTotal = document.getElementById('cartTotal');
+                const cartEmpty = document.getElementById('cartEmpty');
+                
+                if (!cartItemsContainer) return;
+                
+                if (this.cart.length === 0) {
+                    cartItemsContainer.innerHTML = '';
+                    cartEmpty.style.display = 'block';
+                    cartTotal.textContent = '¥0';
+                    return;
+                }
+                
+                cartEmpty.style.display = 'none';
+                
+                cartItemsContainer.innerHTML = this.cart.map(item => `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>¥${item.price.toLocaleString()}</p>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="qty-btn" onclick="cartSystem.updateQuantity('${item.id}', ${item.quantity - 1})" ${item.quantity <= 1 ? 'disabled' : ''}>-</button>
+                            <span class="qty-display">${item.quantity}</span>
+                            <button class="qty-btn" onclick="cartSystem.updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                            <button class="remove-btn" onclick="cartSystem.removeItem('${item.id}')">×</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                cartTotal.textContent = `¥${this.getTotal().toLocaleString()}`;
+            },
+            
+            // Clear cart
+            clearCart() {
+                this.cart = [];
+                this.saveCart();
+                this.updateCartDisplay();
+                this.updateCartModal();
+            }
+        };
+        
+        // Add to cart function
+        function addToCart(button) {
+            const item = {
+                name: button.getAttribute('data-name'),
+                price: button.getAttribute('data-price'),
+                image: button.getAttribute('data-image')
+            };
+            
+            cartSystem.addItem(item);
+            
+            // Button animation
+            button.classList.add('added');
+            const originalText = button.textContent;
+            button.textContent = '追加済み';
+            
+            setTimeout(() => {
+                button.classList.remove('added');
+                button.textContent = originalText;
+            }, 2000);
+        }
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Product Detail Data
+        const productDetails = {
+            ethiopia: {
+                name: 'エチオピア イルガチェフェ',
+                price: 1200,
+                origin: 'エチオピア イルガチェフェ地区',
+                roast: 'ライトロースト',
+                description: 'エチオピアのイルガチェフェ地区から産出される、世界最高峰のコーヒーのひとつです。標高約1,800～2,200mの高地で栽培され、特別な気候と土壌が生み出す素晴らしい風味をお楽しみいただけます。',
+                taste: {
+                    acidity: 5,
+                    body: 3,
+                    sweetness: 4,
+                    bitterness: 2
+                },
+                notes: 'フローラル、シトラス、ベリー系の香り。紅茶のような上品な酸味と花のような香りが特徴です。',
+                brewing: [
+                    'ハンドドリップ（V60、カリタ）',
+                    'フレンチプレス',
+                    'エアロプレス',
+                    'サイフォンコーヒーメーカー'
+                ],
+                processing: 'ウォッシュド製法',
+                farmInfo: '地元の小規模農家による手作業で丁寧に栽培されています。持続可能な農業とフェアトレードを推進しています。',
+                dataId: 'ethiopia'
+            },
+            colombia: {
+                name: 'コロンビア ウイラ',
+                price: 1080,
+                origin: 'コロンビア ウイラ県',
+                roast: 'ミディアムロースト',
+                description: 'コロンビア南部のウイラ県で栽培された、バランスの取れた上品なコーヒーです。アンデス山脈の清澄な水と豊かな火山灰土壌が育む、まろやかで深みのある味わいをお楽しみいただけます。',
+                taste: {
+                    acidity: 3,
+                    body: 4,
+                    sweetness: 4,
+                    bitterness: 3
+                },
+                notes: 'ナッツ、チョコレート、キャラメルの香り。まろやかな甘みと適度なコクが特徴です。',
+                brewing: [
+                    'ドリップコーヒー',
+                    'エスプレッソ',
+                    'フレンチプレス',
+                    'モカポット'
+                ],
+                processing: 'ウォッシュド製法',
+                farmInfo: 'ウイラ県の小規模農家が結成した協同組合で管理されています。高品質なコーヒーの生産を目指しています。',
+                dataId: 'colombia'
+            },
+            rwanda: {
+                name: 'ルワンダ ムサンゼ',
+                price: 1350,
+                origin: 'ルワンダ ムサンゼ地区',
+                roast: 'ライトロースト',
+                description: 'ルワンダのムサンゼ地区で栽培された、近年注目を集める高品質なコーヒーです。標高約1,700～2,000mの高地で栽培され、特別な気候と土壌が生み出す素晴らしい風味をお楽しみいただけます。',
+                taste: {
+                    acidity: 4,
+                    body: 4,
+                    sweetness: 5,
+                    bitterness: 2
+                },
+                notes: 'フルーツ、ハニー、フローラルの香り。甘みが強く、フルーツライクな酸味が特徴です。',
+                brewing: [
+                    'ハンドドリップ（V60）',
+                    'ケメックス',
+                    'エアロプレス',
+                    'サイフォンコーヒーメーカー'
+                ],
+                processing: 'ウォッシュド製法',
+                farmInfo: 'ルワンダの小規模農家による手作業で丁寧に栽培されています。持続可能な農業とフェアトレードを推進しています。',
+                dataId: 'rwanda'
+            },
+            brazil: {
+                name: 'ブラジル セラード',
+                price: 950,
+                origin: 'ブラジル セラード地区',
+                roast: 'ダークロースト',
+                description: 'ブラジルで最も有名なセラード地区から産出される、安定した品質とコストパフォーマンスを誇るコーヒーです。ダークローストにより、深いコクと甘みが引き出されています。',
+                taste: {
+                    acidity: 2,
+                    body: 5,
+                    sweetness: 3,
+                    bitterness: 4
+                },
+                notes: 'ナッツ、チョコレート、カラメルの香り。深いコクと甘みが特徴です。',
+                brewing: [
+                    'エスプレッソ',
+                    'フレンチプレス',
+                    'モカポット',
+                    'ドリップコーヒー'
+                ],
+                processing: 'パルプド・ナチュラル製法',
+                farmInfo: '大規模農園での機械化された栽培と、安定した品質管理が特徴です。',
+                dataId: 'brazil'
+            },
+            guatemala: {
+                name: 'グアテマラ アンティグア',
+                price: 1180,
+                origin: 'グアテマラ アンティグア地区',
+                roast: 'ミディアムロースト',
+                description: 'グアテマラのアンティグア地区で栽培された、世界的に評価の高いコーヒーです。火山灰土壌と清澄な水、理想的な気候が育む、スモーキーでスパイシーな風味をお楽しみいただけます。',
+                taste: {
+                    acidity: 3,
+                    body: 4,
+                    sweetness: 3,
+                    bitterness: 4
+                },
+                notes: 'スモーキー、スパイシー、ダークチョコレートの香り。特徴的なスモーキーな香りとコクが特徴です。',
+                brewing: [
+                    'フレンチプレス',
+                    'エスプレッソ',
+                    'モカポット',
+                    'ドリップコーヒー'
+                ],
+                processing: 'ウォッシュド製法',
+                farmInfo: 'アンティグア地区の伝統的な農家による手作業で丁寧に栽培されています。',
+                dataId: 'guatemala'
+            },
+            kenya: {
+                name: 'ケニア AA',
+                price: 1450,
+                origin: 'ケニア キリニャガ地区',
+                roast: 'ミディアムロースト',
+                description: 'ケニアの最高グレードであるAAグレードのコーヒーです。赤道直下の強い日差しと高地の清澄な空気が育む、力強い酸味とフルーツィーな風味をお楽しみいただけます。',
+                taste: {
+                    acidity: 5,
+                    body: 4,
+                    sweetness: 4,
+                    bitterness: 3
+                },
+                notes: 'ブラックカラント、シトラス、ワインの香り。力強い酸味とフルーツィーな風味が特徴です。',
+                brewing: [
+                    'ハンドドリップ（V60）',
+                    'ケメックス',
+                    'エアロプレス',
+                    'フレンチプレス'
+                ],
+                processing: 'ウォッシュド製法',
+                farmInfo: 'ケニアの小規模農家が結成した協同組合で管理されています。高品質なコーヒーの生産を目指しています。',
+                dataId: 'kenya'
+            }
+        };
+        
+        // Product Detail Functions
+        function showProductDetail(productId) {
+            const product = productDetails[productId];
+            if (!product) return;
+            
+            const modal = document.getElementById('productDetailModal');
+            const content = document.getElementById('productDetailContent');
+            
+            content.innerHTML = `
+                <div class="product-detail-header">
+                    <h2>${product.name}</h2>
+                    <p class="price">¥${product.price.toLocaleString()}</p>
+                </div>
+                
+                <div class="product-detail-body">
+                    <div class="product-image-large">
+                        <div>${product.name}</div>
+                    </div>
+                    
+                    <div class="product-info-detail">
+                        <h3>産地情報</h3>
+                        <p><strong>産地:</strong> ${product.origin}</p>
+                        <p><strong>焙煎度:</strong> ${product.roast}</p>
+                        <p><strong>精製方法:</strong> ${product.processing}</p>
+                        
+                        <h3>味の特徴</h3>
+                        <p>${product.notes}</p>
+                    </div>
+                </div>
+                
+                <div class="taste-profile">
+                    <div class="taste-item">
+                        <div class="taste-label">酸味</div>
+                        <div class="taste-level">
+                            ${generateTasteLevel(product.taste.acidity)}
+                        </div>
+                    </div>
+                    <div class="taste-item">
+                        <div class="taste-label">コク</div>
+                        <div class="taste-level">
+                            ${generateTasteLevel(product.taste.body)}
+                        </div>
+                    </div>
+                    <div class="taste-item">
+                        <div class="taste-label">甘み</div>
+                        <div class="taste-level">
+                            ${generateTasteLevel(product.taste.sweetness)}
+                        </div>
+                    </div>
+                    <div class="taste-item">
+                        <div class="taste-label">苦味</div>
+                        <div class="taste-level">
+                            ${generateTasteLevel(product.taste.bitterness)}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-description">
+                    <h3>商品説明</h3>
+                    <p>${product.description}</p>
+                </div>
+                
+                <div class="brewing-methods">
+                    <h4>おすすめの抽出方法</h4>
+                    <ul>
+                        ${product.brewing.map(method => `<li>${method}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="farm-info">
+                    <h3>農園情報</h3>
+                    <p>${product.farmInfo}</p>
+                </div>
+                
+                <div class="product-detail-actions">
+                    <button class="back-to-products" onclick="closeModal('productDetailModal')">戻る</button>
+                    <button class="detail-add-to-cart" onclick="addToCartFromDetail('${product.dataId}')">カートに追加</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function generateTasteLevel(level) {
+            let dots = '';
+            for (let i = 1; i <= 5; i++) {
+                dots += `<div class="taste-dot ${i <= level ? 'active' : ''}"></div>`;
+            }
+            return dots;
+        }
+        
+        function addToCartFromDetail(productId) {
+            const product = productDetails[productId];
+            if (!product) return;
+            
+            const item = {
+                name: product.name,
+                price: product.price.toString(),
+                image: product.dataId
+            };
+            
+            cartSystem.addItem(item);
+            
+            // Show success message
+            const button = document.querySelector('.detail-add-to-cart');
+            const originalText = button.textContent;
+            button.textContent = '追加済み ✓';
+            button.style.background = 'linear-gradient(45deg, #10b981, #34d399)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(45deg, var(--navy-accent), var(--silver))';
+            }, 2000);
+        }
+        
+        // Cart Modal Functions
+        function openCartModal() {
+            document.getElementById('cartModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            cartSystem.updateCartModal();
+        }
+        
+        function clearCart() {
+            if (confirm('カートを空にしますか？')) {
+                cartSystem.clearCart();
+            }
+        }
+        
+        function checkout() {
+            if (cartSystem.cart.length === 0) {
+                alert('カートが空です。');
+                return;
+            }
+            
+            const user = memberSystem.getCurrentUser();
+            if (!user) {
+                alert('注文するにはログインが必要です。');
+                closeModal('cartModal');
+                openLoginModal();
+                return;
+            }
+            
+            // Simple checkout process
+            const orderSummary = `
+【注文確認】
+お名前: ${user.name}
+メール: ${user.email}
+
+【商品】
+${cartSystem.cart.map(item => `${item.name} x${item.quantity} - ¥${(item.price * item.quantity).toLocaleString()}`).join('\n')}
+
+合計: ¥${cartSystem.getTotal().toLocaleString()}
+
+この内容で注文しますか？`;
+            
+            if (confirm(orderSummary)) {
+                // Save order to localStorage (simple implementation)
+                const orders = JSON.parse(localStorage.getItem('kono_kaffe_orders') || '[]');
+                const newOrder = {
+                    id: Date.now().toString(),
+                    userId: user.id,
+                    items: [...cartSystem.cart],
+                    total: cartSystem.getTotal(),
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                };
+                
+                orders.push(newOrder);
+                localStorage.setItem('kono_kaffe_orders', JSON.stringify(orders));
+                
+                cartSystem.clearCart();
+                closeModal('cartModal');
+                
+                showOrderConfirmation(newOrder);
+            }
+        }
+        
+        function showOrderConfirmation(order) {
+            const confirmation = document.createElement('div');
+            confirmation.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, var(--primary-navy), var(--secondary-navy));
+                color: white;
+                padding: 3rem;
+                border-radius: 20px;
+                z-index: 10001;
+                text-align: center;
+                max-width: 500px;
+                box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+                animation: fadeIn 0.5s ease-out;
+            `;
+            
+            confirmation.innerHTML = `
+                <h2 style="font-family: 'Playfair Display', serif; color: #10b981; margin-bottom: 1rem;">ご注文ありがとうございます！</h2>
+                <p style="margin-bottom: 1rem;">注文番号: ${order.id}</p>
+                <p style="margin-bottom: 1rem;">合計: ¥${order.total.toLocaleString()}</p>
+                <p style="margin-bottom: 2rem; font-size: 0.9rem; color: #d1d5db;">ご注文内容をメールでお送りします。<br>お渡しまで今しばらくお待ちください。</p>
+                <button onclick="this.parentElement.remove()" style="background: linear-gradient(45deg, #10b981, #34d399); color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer; font-family: 'Noto Serif JP', serif;">閉じる</button>
+            `;
+            
+            document.body.appendChild(confirmation);
+            
+            setTimeout(() => {
+                confirmation.remove();
+            }, 10000);
+        }
+        
+        // Initialize product details when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product details are already initialized
         });
     </script>
 </body>
