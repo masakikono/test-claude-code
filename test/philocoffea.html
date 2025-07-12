@@ -136,6 +136,11 @@
             align-items: center;
             gap: 1rem;
             flex-wrap: nowrap;
+            position: relative;
+        }
+        
+        .header-content .logo {
+            flex: 1;
         }
 
         .logo {
@@ -156,56 +161,296 @@
             text-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
         }
 
-        nav ul {
+        /* Mobile Menu Toggle */
+        .menu-toggle {
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
-        nav a {
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Desktop Navigation Styles */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+        }
+
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .desktop-nav a {
             color: var(--white);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
-            padding: 0.5rem 1rem;
-            overflow: hidden;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
 
-        nav a::before {
+        .desktop-nav a::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        nav a:hover::before {
-            left: 100%;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--silver), var(--navy-accent));
+            transform: translate(-50%, -50%);
             transition: width 0.3s ease;
         }
 
-        nav a:hover::after,
-        nav a.active::after {
-            width: 100%;
+        .desktop-nav a:hover::before {
+            width: 80%;
         }
 
-        nav a.active {
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, var(--navy-accent), var(--primary-navy));
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .desktop-nav a:hover::after,
+        .desktop-nav a.active::after {
+            opacity: 0.2;
+        }
+
+        .desktop-nav a.active {
             color: var(--silver);
         }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, 
+                rgba(15, 23, 42, 0.98), 
+                rgba(30, 58, 138, 0.95), 
+                rgba(31, 41, 55, 0.98)
+            );
+            backdrop-filter: blur(25px);
+            border-radius: 0 0 25px 25px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-top: none;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                0 5px 15px rgba(212, 175, 55, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .mobile-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--gold), 
+                var(--silver), 
+                var(--gold), 
+                transparent
+            );
+        }
+
+        .mobile-nav.active {
+            display: block;
+            animation: slideDownMobile 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideDownMobile {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(5px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .mobile-nav ul {
+            flex-direction: column;
+            gap: 0;
+            padding: 1.5rem 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .mobile-nav li {
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .mobile-nav li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-nav li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav li:hover::before {
+            transform: translateX(0);
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 1.4rem 2.5rem;
+            border-radius: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .mobile-nav a::after {
+            content: '→';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%) translateX(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            color: var(--gold);
+        }
+
+        .mobile-nav a:hover {
+            background: linear-gradient(90deg, 
+                rgba(212, 175, 55, 0.1), 
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            padding-left: 3rem;
+            color: var(--silver);
+            letter-spacing: 1px;
+        }
+
+        .mobile-nav a:hover::after {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .mobile-nav a:active {
+            transform: scale(0.98);
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Header Actions (Cart + Auth) */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Responsive Design for Header */
+        @media (max-width: 1024px) {
+            .header-content {
+                gap: 0.5rem;
+            }
+            
+            .desktop-nav ul {
+                gap: 1rem;
+            }
+            
+            .desktop-nav a {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Responsive adjustments for different screen sizes */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .header-actions {
+                gap: 0.3rem;
+            }
+
+            .cart-container .cart-icon {
+                padding: 0.4rem;
+                font-size: 1rem;
+            }
+
+            .auth-buttons button {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.75rem;
+            }
+        }
+
 
         /* Hero Section with Parallax */
         .hero {
@@ -1840,6 +2085,1821 @@
                 font-size: 0.75rem;
             }
         }
+
+        /* Brewing Guide Section Styles */
+        .brewing-guide {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brewing-guide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23f3f4f6" opacity="0.3"/></svg>') repeat;
+            background-size: 50px 50px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--light-text);
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .brewing-methods {
+            position: relative;
+            z-index: 1;
+        }
+
+        .method-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .method-btn {
+            padding: 1rem 2rem;
+            background: var(--white);
+            border: 2px solid var(--light-gray);
+            border-radius: 30px;
+            color: var(--dark-text);
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .method-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--navy-accent);
+        }
+
+        .method-btn.active {
+            background: linear-gradient(45deg, var(--primary-navy), var(--navy-accent));
+            color: var(--white);
+            border-color: var(--primary-navy);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.3);
+        }
+
+        .method-guide {
+            display: none;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+
+        .method-guide.active {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .guide-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .guide-visual {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid var(--light-gray);
+        }
+
+        .brewing-illustration {
+            height: 250px;
+            position: relative;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Drip Coffee Illustration */
+        .drip-illustration .coffee-dripper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .dripper-top {
+            width: 60px;
+            height: 15px;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            border-radius: 50px 50px 10px 10px;
+            margin: 0 auto 5px;
+        }
+
+        .dripper-body {
+            width: 80px;
+            height: 60px;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            border-radius: 0 0 50px 50px;
+            position: relative;
+        }
+
+        .water-drop {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: linear-gradient(to bottom, #4A90E2, #357ABD);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: dropFall 2s infinite;
+        }
+
+        @keyframes dropFall {
+            0% { top: 70px; opacity: 1; }
+            100% { top: 120px; opacity: 0; }
+        }
+
+        .coffee-cup-base {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cup-body {
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(145deg, var(--white), var(--light-gray));
+            border-radius: 0 0 30px 30px;
+            border: 2px solid var(--accent-gray);
+        }
+
+        .coffee-level {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            height: 0px;
+            background: linear-gradient(to top, #3E2723, #5D4037);
+            border-radius: 0 0 26px 26px;
+            animation: fillCup 4s infinite;
+        }
+
+        @keyframes fillCup {
+            0% { height: 0px; }
+            50% { height: 20px; }
+            100% { height: 35px; }
+        }
+
+        /* French Press Illustration */
+        .french-press {
+            position: relative;
+            width: 70px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .press-plunger {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            border-radius: 4px;
+            animation: plungePress 6s infinite;
+        }
+
+        @keyframes plungePress {
+            0%, 70% { top: -10px; }
+            90%, 100% { top: 30px; }
+        }
+
+        .press-body {
+            width: 70px;
+            height: 100px;
+            background: linear-gradient(145deg, var(--white), var(--light-gray));
+            border: 3px solid var(--accent-gray);
+            border-radius: 0 0 35px 35px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coffee-grounds {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 25px;
+            background: linear-gradient(to top, #3E2723, #5D4037);
+            opacity: 0.7;
+        }
+
+        .coffee-water {
+            position: absolute;
+            bottom: 25px;
+            width: 100%;
+            height: 0px;
+            background: linear-gradient(to top, #6D4C41, #8D6E63);
+            animation: fillFrenchPress 6s infinite;
+        }
+
+        @keyframes fillFrenchPress {
+            0% { height: 0px; }
+            30% { height: 65px; }
+            100% { height: 65px; }
+        }
+
+        /* Espresso Machine Illustration */
+        .espresso-machine {
+            position: relative;
+            width: 100px;
+            height: 140px;
+            margin: 0 auto;
+        }
+
+        .machine-body {
+            width: 80px;
+            height: 60px;
+            background: linear-gradient(145deg, #2C3E50, #34495E);
+            border-radius: 10px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .portafilter {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            border-radius: 20px;
+        }
+
+        .espresso-stream {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 0px;
+            background: linear-gradient(to bottom, #8D6E63, #5D4037);
+            animation: espressoExtraction 3s infinite;
+        }
+
+        @keyframes espressoExtraction {
+            0% { height: 0px; }
+            30%, 70% { height: 35px; }
+            100% { height: 0px; }
+        }
+
+        .espresso-cup {
+            position: absolute;
+            top: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 25px;
+        }
+
+        .espresso-shot {
+            width: 35px;
+            height: 20px;
+            background: linear-gradient(145deg, #3E2723, #2E1A17);
+            border-radius: 0 0 17px 17px;
+            position: relative;
+        }
+
+        .crema {
+            position: absolute;
+            top: -3px;
+            width: 100%;
+            height: 0px;
+            background: linear-gradient(145deg, #D2B48C, #F4A460);
+            border-radius: 17px 17px 0 0;
+            animation: cremaDevelopment 3s infinite;
+        }
+
+        @keyframes cremaDevelopment {
+            0% { height: 0px; }
+            50%, 100% { height: 8px; }
+        }
+
+        /* V60 Pour Over Illustration */
+        .v60-dripper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+
+        .dripper-spiral {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, var(--white), var(--light-gray));
+            border: 2px solid var(--accent-gray);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+        }
+
+        .dripper-spiral::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--light-text);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.3;
+        }
+
+        .coffee-bed {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            height: 35px;
+            background: linear-gradient(to bottom, #8D6E63, #5D4037);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .pour-stream {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 0px;
+            background: linear-gradient(to bottom, #4A90E2, #357ABD);
+            animation: pourMotion 4s infinite;
+        }
+
+        @keyframes pourMotion {
+            0%, 20% { height: 0px; }
+            30%, 60% { height: 25px; }
+            80%, 100% { height: 0px; }
+        }
+
+        .server-pot {
+            position: relative;
+            width: 70px;
+            height: 50px;
+            margin: 0 auto;
+        }
+
+        .pot-body {
+            width: 70px;
+            height: 50px;
+            background: linear-gradient(145deg, var(--white), var(--light-gray));
+            border: 2px solid var(--accent-gray);
+            border-radius: 0 0 35px 35px;
+        }
+
+        /* Timer Styles */
+        .brewing-timer {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid var(--light-gray);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer-display {
+            text-align: center;
+        }
+
+        .timer-display span {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-navy);
+            font-family: 'Playfair Display', serif;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .timer-btn, .timer-reset {
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem;
+            border: 2px solid var(--primary-navy);
+            border-radius: 25px;
+            background: var(--white);
+            color: var(--primary-navy);
+            cursor: pointer;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .timer-btn:hover, .timer-reset:hover {
+            background: var(--primary-navy);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .timer-btn.active {
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            border-color: #dc2626;
+            color: var(--white);
+        }
+
+        /* Guide Steps Styles */
+        .guide-steps h3 {
+            color: var(--primary-navy);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 15px;
+            border-left: 4px solid var(--navy-accent);
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            background: linear-gradient(45deg, var(--primary-navy), var(--navy-accent));
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary-navy);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .step-content p {
+            color: var(--dark-text);
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .step-details {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--navy-accent);
+        }
+
+        .step-details strong {
+            color: var(--navy-accent);
+            font-weight: 600;
+        }
+
+        /* Brewing Tips Section */
+        .brewing-tips {
+            margin-top: 4rem;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .brewing-tips h3 {
+            text-align: center;
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-item {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tip-item:hover {
+            border-color: var(--navy-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .tip-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tip-item h4 {
+            color: var(--primary-navy);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tip-item p {
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Responsive Design for Brewing Guide */
+        @media (max-width: 768px) {
+            .brewing-guide {
+                padding: 3rem 0;
+            }
+            
+            .method-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .method-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .guide-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .brewing-illustration {
+                height: 200px;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .method-guide {
+                padding: 2rem;
+            }
+            
+            .brewing-tips {
+                margin-top: 2rem;
+                padding: 2rem;
+            }
+            
+            .timer-btn, .timer-reset {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.8rem;
+                margin: 0.2rem;
+            }
+        }
+
+        /* Tasting Section Styles */
+        .tasting-section {
+            background: linear-gradient(135deg, var(--off-white), var(--cream-white));
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .tasting-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Flavor Wheel Styles */
+        .flavor-wheel-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .flavor-wheel-container h3 {
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .flavor-description {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .flavor-wheel {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto 2rem;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-navy), var(--navy-accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .wheel-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .flavor-segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .flavor-segment::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 175px;
+            height: 175px;
+            transform: translateX(-50%) rotate(var(--start));
+            clip-path: polygon(50% 50%, 50% 0%, 
+                            calc(50% + 50% * sin(var(--end) - var(--start))) 
+                            calc(50% - 50% * cos(var(--end) - var(--start))));
+            transition: all 0.3s ease;
+        }
+
+        .inner-ring .flavor-segment::before {
+            border-radius: 50%;
+        }
+
+        .outer-ring .flavor-segment::before {
+            width: 175px;
+            height: 175px;
+        }
+
+        /* Flavor Categories Colors */
+        .fruity::before { background: linear-gradient(135deg, #FF6B9D, #FF8E9B); }
+        .floral::before { background: linear-gradient(135deg, #E8A0C0, #F5B0E8); }
+        .sweet::before { background: linear-gradient(135deg, #A0522D, #D2B48C); }
+        .nutty::before { background: linear-gradient(135deg, #8B4513, #CD853F); }
+        .earthy::before { background: linear-gradient(135deg, #556B2F, #9ACD32); }
+
+        /* Specific Flavor Colors */
+        .berry::before { background: linear-gradient(135deg, #DC143C, #FF69B4); }
+        .citrus::before { background: linear-gradient(135deg, #FFA500, #FFD700); }
+        .stone-fruit::before { background: linear-gradient(135deg, #FF7F50, #FFA07A); }
+        .jasmine::before { background: linear-gradient(135deg, #F0E68C, #FFFFE0); }
+        .rose::before { background: linear-gradient(135deg, #FFB6C1, #FFC0CB); }
+        .lavender::before { background: linear-gradient(135deg, #E6E6FA, #DDA0DD); }
+        .chocolate::before { background: linear-gradient(135deg, #8B4513, #A0522D); }
+        .caramel::before { background: linear-gradient(135deg, #D2B48C, #F4A460); }
+        .honey::before { background: linear-gradient(135deg, #DAA520, #FFD700); }
+        .almond::before { background: linear-gradient(135deg, #DEB887, #F5DEB3); }
+        .hazelnut::before { background: linear-gradient(135deg, #D2691E, #CD853F); }
+        .walnut::before { background: linear-gradient(135deg, #8B4513, #A0522D); }
+        .woody::before { background: linear-gradient(135deg, #8B4513, #D2691E); }
+        .herbal::before { background: linear-gradient(135deg, #6B8E23, #9ACD32); }
+        .spicy::before { background: linear-gradient(135deg, #B22222, #DC143C); }
+
+        .flavor-segment:hover::before {
+            filter: brightness(1.3) saturate(1.2);
+            transform: translateX(-50%) rotate(var(--start)) scale(1.08);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .flavor-segment:active::before {
+            filter: brightness(1.5) saturate(1.4);
+            transform: translateX(-50%) rotate(var(--start)) scale(0.95);
+        }
+
+        .flavor-segment.selected::before {
+            filter: brightness(1.4) saturate(1.3);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--gold);
+        }
+
+        @keyframes flavorPulse {
+            0% { transform: translateX(-50%) rotate(var(--start)) scale(1); }
+            50% { transform: translateX(-50%) rotate(var(--start)) scale(1.1); }
+            100% { transform: translateX(-50%) rotate(var(--start)) scale(1); }
+        }
+
+        .flavor-label, .flavor-sublabel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(calc((var(--start) + var(--end)) / 2));
+            color: var(--white);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .flavor-sublabel {
+            font-size: 0.7rem;
+        }
+
+        .flavor-info {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--navy-accent);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .flavor-detail {
+            animation: flavorInfoFadeIn 0.5s ease-out;
+        }
+
+        @keyframes flavorInfoFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .flavor-name {
+            color: var(--primary-navy);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .flavor-category {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--gold), var(--silver));
+            color: var(--white);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .flavor-description {
+            color: var(--dark-text);
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .flavor-info h4 {
+            color: var(--primary-navy);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Tasting Notes Form Styles */
+        .tasting-notes-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .tasting-notes-container h3 {
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tasting-description {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .tasting-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .coffee-selector select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            background: var(--white);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+
+        .coffee-selector select:focus {
+            outline: none;
+            border-color: var(--navy-accent);
+        }
+
+        .taste-attributes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .attribute-group label {
+            display: block;
+            color: var(--primary-navy);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-slider {
+            margin-bottom: 1rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, var(--light-gray), var(--navy-accent));
+            outline: none;
+            -webkit-appearance: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--navy-accent);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--navy-accent);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+
+        .slider-labels span:nth-child(2) {
+            color: var(--navy-accent);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .selected-flavors {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 10px;
+            padding: 1.5rem;
+            min-height: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .flavor-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .flavor-tag.fruity { background: linear-gradient(135deg, #FF6B9D, #FF8E9B); }
+        .flavor-tag.floral { background: linear-gradient(135deg, #E8A0C0, #F5B0E8); }
+        .flavor-tag.sweet { background: linear-gradient(135deg, #A0522D, #D2B48C); }
+        .flavor-tag.nutty { background: linear-gradient(135deg, #8B4513, #CD853F); }
+        .flavor-tag.earthy { background: linear-gradient(135deg, #556B2F, #9ACD32); }
+
+        .flavor-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-flavors {
+            color: var(--light-text);
+            font-style: italic;
+            margin: 0;
+        }
+
+        .tasting-notes-text textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1rem;
+            color: var(--dark-text);
+            resize: vertical;
+        }
+
+        .tasting-notes-text textarea:focus {
+            outline: none;
+            border-color: var(--navy-accent);
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .star {
+            color: var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .save-tasting-btn, .clear-form-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .save-tasting-btn {
+            background: linear-gradient(45deg, var(--primary-navy), var(--navy-accent));
+            color: var(--white);
+        }
+
+        .save-tasting-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.3);
+        }
+
+        .clear-form-btn {
+            background: var(--white);
+            color: var(--primary-navy);
+            border: 2px solid var(--light-gray);
+        }
+
+        .clear-form-btn:hover {
+            background: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        /* Saved Notes Section */
+        .saved-notes-section {
+            margin-top: 4rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .saved-notes-section h3 {
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .note-card {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid var(--navy-accent);
+            transition: all 0.3s ease;
+        }
+
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .note-coffee {
+            font-weight: bold;
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+        }
+
+        .note-date {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .note-attributes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .note-attribute {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .note-flavors {
+            margin-bottom: 1rem;
+        }
+
+        .note-text {
+            color: var(--dark-text);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .note-rating {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .no-saved-notes {
+            text-align: center;
+            color: var(--light-text);
+            font-style: italic;
+            grid-column: 1 / -1;
+        }
+
+        /* Coffee Profiles Section */
+        .coffee-profiles-section {
+            margin-top: 4rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .coffee-profiles-section h3 {
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .coffee-profile {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 15px;
+            padding: 2rem;
+            border-top: 4px solid var(--navy-accent);
+            transition: all 0.3s ease;
+        }
+
+        .coffee-profile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .coffee-profile h4 {
+            color: var(--primary-navy);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+
+        .profile-chart {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-attribute {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-attribute span:first-child {
+            min-width: 60px;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .profile-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .profile-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--navy-accent), var(--primary-navy));
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        .profile-attribute span:last-child {
+            min-width: 20px;
+            color: var(--primary-navy);
+            font-weight: bold;
+        }
+
+        .profile-flavors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-description {
+            color: var(--dark-text);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Responsive Design for Tasting Section */
+        @media (max-width: 768px) {
+            .tasting-section {
+                padding: 3rem 0;
+            }
+            
+            .tasting-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .flavor-wheel {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .taste-attributes {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .flavor-wheel-container,
+            .tasting-notes-container {
+                padding: 2rem;
+            }
+        }
+
+        /* Origin Stories Section Styles */
+        .origin-stories {
+            background: linear-gradient(135deg, var(--primary-navy), var(--dark-navy));
+            padding: 5rem 0;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .origin-stories::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="40" cy="80" r="1" fill="%23ffffff" opacity="0.1"/></svg>') repeat;
+            background-size: 100px 100px;
+            pointer-events: none;
+        }
+
+        .origin-stories .section-title {
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .origin-stories .section-subtitle {
+            color: var(--silver);
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        /* World Map Styles */
+        .world-map-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .world-map-container h3 {
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .coffee-world-map {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+        }
+
+        .map-svg {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #E8F4FD, #D1E9F6);
+            border: 2px solid var(--light-gray);
+        }
+
+        .coffee-belt {
+            opacity: 0.3;
+        }
+
+        .belt-label {
+            fill: var(--primary-navy);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .origin-marker {
+            fill: var(--navy-accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+        }
+
+        .origin-marker:hover {
+            fill: var(--gold);
+            filter: drop-shadow(0 6px 12px rgba(212, 175, 55, 0.4));
+        }
+
+        .origin-marker.active {
+            fill: var(--gold);
+            filter: drop-shadow(0 6px 12px rgba(212, 175, 55, 0.6));
+        }
+
+        .origin-label {
+            fill: var(--primary-navy);
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Noto Serif JP', serif;
+            pointer-events: none;
+        }
+
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-marker {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--navy-accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        /* Country Info Display */
+        .country-info-display {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+            color: var(--dark-text);
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .country-info-display h3 {
+            color: var(--primary-navy);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Origin Stories Grid */
+        .origin-stories-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .origin-story {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+            transition: all 0.3s ease;
+        }
+
+        .origin-story:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .story-image {
+            position: relative;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ethiopia-bg {
+            background: linear-gradient(135deg, #FF6B9D, #FF8E9B, #FFB085);
+        }
+
+        .colombia-bg {
+            background: linear-gradient(135deg, #A0522D, #D2B48C, #F4A460);
+        }
+
+        .rwanda-bg {
+            background: linear-gradient(135deg, #E8A0C0, #F5B0E8, #DDA0DD);
+        }
+
+        .country-flag {
+            z-index: 2;
+            position: relative;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .story-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .story-header h3 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .story-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .story-meta span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .story-text p {
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .farm-details h4 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--navy-accent);
+        }
+
+        .detail-item strong {
+            color: var(--silver);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-item span {
+            color: var(--white);
+        }
+
+        .sustainability-info h4 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .sustainability-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tag.organic { background: linear-gradient(135deg, #10b981, #34d399); }
+        .tag.fair-trade { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .tag.bird-friendly { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .tag.rainforest { background: linear-gradient(135deg, #059669, #10b981); }
+        .tag.women { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .tag.community { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+
+        .sustainability-info p {
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* Processing Methods Section */
+        .processing-methods-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            color: var(--dark-text);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .processing-methods-section h3 {
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .processing-intro {
+            text-align: center;
+            color: var(--light-text);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .processing-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .processing-method {
+            background: linear-gradient(135deg, var(--cream-white), var(--off-white));
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border-top: 4px solid var(--navy-accent);
+            transition: all 0.3s ease;
+        }
+
+        .processing-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .method-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .processing-method h4 {
+            color: var(--primary-navy);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .method-process {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid var(--navy-accent);
+        }
+
+        .step-number {
+            background: var(--navy-accent);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .method-characteristics,
+        .method-countries {
+            text-align: left;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .method-characteristics strong,
+        .method-countries strong {
+            color: var(--primary-navy);
+        }
+
+        /* Seasonal Calendar Section */
+        .seasonal-calendar-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            color: var(--dark-text);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .seasonal-calendar-section h3 {
+            color: var(--primary-navy);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .calendar-intro {
+            text-align: center;
+            color: var(--light-text);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .harvest-calendar {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .calendar-month-grid {
+            display: grid;
+            grid-template-columns: 120px repeat(12, 1fr);
+            gap: 1px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .month-header {
+            background: var(--primary-navy);
+            color: var(--white);
+            padding: 1rem 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .country-row {
+            display: contents;
+        }
+
+        .country-name {
+            background: var(--cream-white);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-navy);
+            border-right: 2px solid var(--light-gray);
+        }
+
+        .harvest-bar {
+            background: var(--navy-accent);
+            margin: 0.5rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .legend-bar {
+            width: 30px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--navy-accent), var(--primary-navy));
+            border-radius: 4px;
+        }
+
+        .legend-note {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* Responsive Design for Origin Stories */
+        @media (max-width: 768px) {
+            .origin-stories {
+                padding: 3rem 0;
+            }
+            
+            .origin-story {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+            
+            .image-placeholder {
+                height: 150px;
+            }
+            
+            .story-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .processing-methods-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-month-grid {
+                grid-template-columns: 80px repeat(12, 1fr);
+                font-size: 0.8rem;
+            }
+            
+            .month-header {
+                padding: 0.8rem 0.3rem;
+                font-size: 0.7rem;
+            }
+            
+            .country-name {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .world-map-container {
+                padding: 2rem;
+            }
+            
+            .processing-methods-section,
+            .seasonal-calendar-section {
+                padding: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1868,23 +3928,51 @@
         <div class="container">
             <div class="header-content">
                 <a href="#home" class="logo">KONO KAFFE</a>
-                <nav>
+                
+                <!-- Mobile Menu Toggle -->
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
                     <ul>
                         <li><a href="#home">ホーム</a></li>
                         <li><a href="#about">私たちについて</a></li>
+                        <li><a href="#brewing">抽出ガイド</a></li>
+                        <li><a href="#tasting">テイスティング</a></li>
+                        <li><a href="#origins">産地ストーリー</a></li>
                         <li><a href="#coffee">コーヒー</a></li>
                         <li><a href="#contact">お問い合わせ</a></li>
                     </ul>
                 </nav>
-                <div class="cart-container">
-                    <div class="cart-icon" onclick="openCartModal()">
-                        <span class="cart-symbol">🛒</span>
-                        <span class="cart-count" id="cartCount">0</span>
-                    </div>
+                
+                <!-- Mobile Navigation -->
+                <div class="mobile-nav" id="mobileNav">
+                    <ul>
+                        <li><a href="#home" onclick="closeMobileMenu()">ホーム</a></li>
+                        <li><a href="#about" onclick="closeMobileMenu()">私たちについて</a></li>
+                        <li><a href="#brewing" onclick="closeMobileMenu()">抽出ガイド</a></li>
+                        <li><a href="#tasting" onclick="closeMobileMenu()">テイスティング</a></li>
+                        <li><a href="#origins" onclick="closeMobileMenu()">産地ストーリー</a></li>
+                        <li><a href="#coffee" onclick="closeMobileMenu()">コーヒー</a></li>
+                        <li><a href="#contact" onclick="closeMobileMenu()">お問い合わせ</a></li>
+                    </ul>
                 </div>
-                <div class="auth-buttons" id="authButtons">
-                    <button class="login-btn" onclick="openLoginModal()">ログイン</button>
-                    <button class="register-btn" onclick="openRegisterModal()">新規登録</button>
+                
+                <div class="header-actions">
+                    <div class="cart-container">
+                        <div class="cart-icon" onclick="openCartModal()">
+                            <span class="cart-symbol">🛒</span>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </div>
+                    </div>
+                    <div class="auth-buttons" id="authButtons">
+                        <button class="login-btn" onclick="openLoginModal()">ログイン</button>
+                        <button class="register-btn" onclick="openRegisterModal()">新規登録</button>
+                    </div>
                 </div>
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <span class="user-name" id="userName">○○さん</span>
@@ -1924,6 +4012,1093 @@
                     <div>
                         <h3>コーヒーへの情熱</h3>
                         <p>品質にこだわり抜いた<br>スペシャルティコーヒー</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brewing Guide Section -->
+    <section class="brewing-guide" id="brewing">
+        <div class="container">
+            <h2 class="section-title">コーヒー抽出ガイド</h2>
+            <p class="section-subtitle">プロの技を学んで、ご自宅で最高の一杯を</p>
+            
+            <div class="brewing-methods">
+                <div class="method-selector">
+                    <button class="method-btn active" data-method="drip">ドリップ</button>
+                    <button class="method-btn" data-method="french">フレンチプレス</button>
+                    <button class="method-btn" data-method="espresso">エスプレッソ</button>
+                    <button class="method-btn" data-method="pour-over">ハンドドリップ</button>
+                </div>
+
+                <!-- Drip Method -->
+                <div class="method-guide active" id="drip-guide">
+                    <div class="guide-content">
+                        <div class="guide-visual">
+                            <div class="brewing-illustration drip-illustration">
+                                <div class="coffee-dripper">
+                                    <div class="dripper-top"></div>
+                                    <div class="dripper-body"></div>
+                                    <div class="water-drop" id="waterDrop"></div>
+                                </div>
+                                <div class="coffee-cup-base">
+                                    <div class="cup-body"></div>
+                                    <div class="coffee-level" id="coffeeLevel"></div>
+                                </div>
+                            </div>
+                            <div class="brewing-timer">
+                                <div class="timer-display">
+                                    <span id="timer">00:00</span>
+                                    <button class="timer-btn" onclick="toggleTimer('drip')">スタート</button>
+                                    <button class="timer-reset" onclick="resetTimer()">リセット</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-steps">
+                            <h3>ドリップコーヒーの淹れ方</h3>
+                            <div class="step-list">
+                                <div class="step-item" data-step="1">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>フィルターをセット</h4>
+                                        <p>コーヒーフィルターをドリッパーにセットし、お湯で軽く湿らせます</p>
+                                        <div class="step-details">
+                                            <strong>Point:</strong> フィルターの匂いを除去し、ドリッパーを温めます
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item" data-step="2">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>コーヒー粉を入れる</h4>
+                                        <p>中挽きのコーヒー粉を20g入れ、平らにならします</p>
+                                        <div class="step-details">
+                                            <strong>比率:</strong> コーヒー粉 20g : お湯 300ml (1:15)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item" data-step="3">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>蒸らし (30秒)</h4>
+                                        <p>90-95℃のお湯を50ml注いで30秒蒸らします</p>
+                                        <div class="step-details">
+                                            <strong>目安:</strong> コーヒー粉がプクプクと膨らんできたらOK
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item" data-step="4">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h4>抽出 (2-3分)</h4>
+                                        <p>残りのお湯を3回に分けてゆっくり注ぎます</p>
+                                        <div class="step-details">
+                                            <strong>Total time:</strong> 3-4分で抽出完了
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- French Press Method -->
+                <div class="method-guide" id="french-guide">
+                    <div class="guide-content">
+                        <div class="guide-visual">
+                            <div class="brewing-illustration french-illustration">
+                                <div class="french-press">
+                                    <div class="press-plunger" id="frenchPlunger"></div>
+                                    <div class="press-body">
+                                        <div class="coffee-grounds"></div>
+                                        <div class="coffee-water" id="frenchWater"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brewing-timer">
+                                <div class="timer-display">
+                                    <span id="timer-french">04:00</span>
+                                    <button class="timer-btn" onclick="toggleTimer('french')">スタート</button>
+                                    <button class="timer-reset" onclick="resetTimer()">リセット</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-steps">
+                            <h3>フレンチプレスの淹れ方</h3>
+                            <div class="step-list">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>粗挽きのコーヒー粉を入れる</h4>
+                                        <p>30gの粗挽きコーヒー粉をプレスに入れます</p>
+                                        <div class="step-details">
+                                            <strong>比率:</strong> コーヒー粉 30g : お湯 500ml (1:16.7)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>お湯を注ぐ</h4>
+                                        <p>93-96℃のお湯500mlを一気に注ぎます</p>
+                                        <div class="step-details">
+                                            <strong>Point:</strong> コーヒー粉全体にお湯が行き渡るように
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>4分間浸漬</h4>
+                                        <p>プランジャーは下げずに4分間待ちます</p>
+                                        <div class="step-details">
+                                            <strong>重要:</strong> 時間を正確に測ることがポイント
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h4>プランジャーを押す</h4>
+                                        <p>ゆっくりと均等な力でプランジャーを下げます</p>
+                                        <div class="step-details">
+                                            <strong>注意:</strong> 急激に押すと苦味が出ます
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espresso Method -->
+                <div class="method-guide" id="espresso-guide">
+                    <div class="guide-content">
+                        <div class="guide-visual">
+                            <div class="brewing-illustration espresso-illustration">
+                                <div class="espresso-machine">
+                                    <div class="machine-body"></div>
+                                    <div class="portafilter"></div>
+                                    <div class="espresso-stream" id="espressoStream"></div>
+                                    <div class="espresso-cup">
+                                        <div class="crema" id="espressoCrema"></div>
+                                        <div class="espresso-shot" id="espressoShot"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brewing-timer">
+                                <div class="timer-display">
+                                    <span id="timer-espresso">00:25</span>
+                                    <button class="timer-btn" onclick="toggleTimer('espresso')">スタート</button>
+                                    <button class="timer-reset" onclick="resetTimer()">リセット</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-steps">
+                            <h3>エスプレッソの淹れ方</h3>
+                            <div class="step-list">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>グラインド</h4>
+                                        <p>極細挽きのコーヒー粉18-20gを準備</p>
+                                        <div class="step-details">
+                                            <strong>重要:</strong> 挽いてすぐに使用することが必須
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>タンピング</h4>
+                                        <p>ポルタフィルターに粉を入れ、30lbsの力でタンピング</p>
+                                        <div class="step-details">
+                                            <strong>Point:</strong> 水平で均一に圧縮すること
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>抽出</h4>
+                                        <p>9バールの圧力で25-30秒かけて抽出</p>
+                                        <div class="step-details">
+                                            <strong>目標:</strong> 30ml（ダブルショット60ml）
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h4>クレマの確認</h4>
+                                        <p>表面に美しいクレマが浮かんでいれば成功</p>
+                                        <div class="step-details">
+                                            <strong>品質指標:</strong> クレマの色と持続性
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pour Over Method -->
+                <div class="method-guide" id="pour-over-guide">
+                    <div class="guide-content">
+                        <div class="guide-visual">
+                            <div class="brewing-illustration pour-over-illustration">
+                                <div class="v60-dripper">
+                                    <div class="dripper-spiral"></div>
+                                    <div class="coffee-bed"></div>
+                                    <div class="pour-stream" id="pourStream"></div>
+                                </div>
+                                <div class="server-pot">
+                                    <div class="pot-body"></div>
+                                    <div class="coffee-level" id="pourCoffeeLevel"></div>
+                                </div>
+                            </div>
+                            <div class="brewing-timer">
+                                <div class="timer-display">
+                                    <span id="timer-pour">02:30</span>
+                                    <button class="timer-btn" onclick="toggleTimer('pour')">スタート</button>
+                                    <button class="timer-reset" onclick="resetTimer()">リセット</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="guide-steps">
+                            <h3>V60ハンドドリップの淹れ方</h3>
+                            <div class="step-list">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>フィルターリンス</h4>
+                                        <p>V60フィルターをセットし、お湯でリンス</p>
+                                        <div class="step-details">
+                                            <strong>目的:</strong> ペーパー臭の除去とドリッパーの予熱
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>コーヒー粉をセット</h4>
+                                        <p>中細挽きのコーヒー粉22gを入れ、中央を少し凹ませる</p>
+                                        <div class="step-details">
+                                            <strong>比率:</strong> 1:15 (粉22g : お湯330ml)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>第1注 - ブルーミング</h4>
+                                        <p>中央から外側に向けて44mlを30秒で注ぐ</p>
+                                        <div class="step-details">
+                                            <strong>Point:</strong> コーヒー粉の2倍の重量のお湯
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h4>第2-4注で完成</h4>
+                                        <p>残り286mlを3回に分けて注ぎ、2分30秒で完成</p>
+                                        <div class="step-details">
+                                            <strong>総時間:</strong> 2分30秒〜3分以内
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="brewing-tips">
+                <h3>抽出のコツ</h3>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <div class="tip-icon">🌡️</div>
+                        <h4>水温管理</h4>
+                        <p>浅煎り: 93-96℃<br>深煎り: 88-92℃</p>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">⚖️</div>
+                        <h4>正確な計量</h4>
+                        <p>デジタルスケールで<br>粉とお湯を正確に計量</p>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">💧</div>
+                        <h4>水質</h4>
+                        <p>軟水を使用<br>TDS値: 150-300ppm</p>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">⏱️</div>
+                        <h4>挽き時期</h4>
+                        <p>抽出直前に<br>豆を挽くのがベスト</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tasting Notes & Flavor Wheel Section -->
+    <section class="tasting-section" id="tasting">
+        <div class="container">
+            <h2 class="section-title">コーヒーテイスティング</h2>
+            <p class="section-subtitle">味覚を磨いて、コーヒーの奥深い世界を探求しましょう</p>
+            
+            <div class="tasting-content">
+                <!-- Flavor Wheel -->
+                <div class="flavor-wheel-container">
+                    <h3>フレーバーホイール</h3>
+                    <p class="flavor-description">コーヒーの味わいを表現する言葉を学び、あなたの味覚体験を豊かにしましょう</p>
+                    
+                    <div class="flavor-wheel" id="flavorWheel">
+                        <div class="wheel-center">
+                            <span>COFFEE<br>FLAVORS</span>
+                        </div>
+                        
+                        <!-- Inner Ring - Main Categories -->
+                        <div class="wheel-ring inner-ring">
+                            <div class="flavor-segment fruity" data-category="fruity" style="--start: 0deg; --end: 72deg;">
+                                <span class="flavor-label">フルーティー</span>
+                            </div>
+                            <div class="flavor-segment floral" data-category="floral" style="--start: 72deg; --end: 144deg;">
+                                <span class="flavor-label">フローラル</span>
+                            </div>
+                            <div class="flavor-segment sweet" data-category="sweet" style="--start: 144deg; --end: 216deg;">
+                                <span class="flavor-label">甘い</span>
+                            </div>
+                            <div class="flavor-segment nutty" data-category="nutty" style="--start: 216deg; --end: 288deg;">
+                                <span class="flavor-label">ナッティー</span>
+                            </div>
+                            <div class="flavor-segment earthy" data-category="earthy" style="--start: 288deg; --end: 360deg;">
+                                <span class="flavor-label">アーシー</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Outer Ring - Specific Flavors -->
+                        <div class="wheel-ring outer-ring">
+                            <!-- Fruity subcategories -->
+                            <div class="flavor-segment berry" data-flavor="berry" style="--start: 0deg; --end: 24deg;">
+                                <span class="flavor-sublabel">ベリー</span>
+                            </div>
+                            <div class="flavor-segment citrus" data-flavor="citrus" style="--start: 24deg; --end: 48deg;">
+                                <span class="flavor-sublabel">柑橘</span>
+                            </div>
+                            <div class="flavor-segment stone-fruit" data-flavor="stone-fruit" style="--start: 48deg; --end: 72deg;">
+                                <span class="flavor-sublabel">核果類</span>
+                            </div>
+                            
+                            <!-- Floral subcategories -->
+                            <div class="flavor-segment jasmine" data-flavor="jasmine" style="--start: 72deg; --end: 96deg;">
+                                <span class="flavor-sublabel">ジャスミン</span>
+                            </div>
+                            <div class="flavor-segment rose" data-flavor="rose" style="--start: 96deg; --end: 120deg;">
+                                <span class="flavor-sublabel">ローズ</span>
+                            </div>
+                            <div class="flavor-segment lavender" data-flavor="lavender" style="--start: 120deg; --end: 144deg;">
+                                <span class="flavor-sublabel">ラベンダー</span>
+                            </div>
+                            
+                            <!-- Sweet subcategories -->
+                            <div class="flavor-segment chocolate" data-flavor="chocolate" style="--start: 144deg; --end: 168deg;">
+                                <span class="flavor-sublabel">チョコレート</span>
+                            </div>
+                            <div class="flavor-segment caramel" data-flavor="caramel" style="--start: 168deg; --end: 192deg;">
+                                <span class="flavor-sublabel">キャラメル</span>
+                            </div>
+                            <div class="flavor-segment honey" data-flavor="honey" style="--start: 192deg; --end: 216deg;">
+                                <span class="flavor-sublabel">ハニー</span>
+                            </div>
+                            
+                            <!-- Nutty subcategories -->
+                            <div class="flavor-segment almond" data-flavor="almond" style="--start: 216deg; --end: 240deg;">
+                                <span class="flavor-sublabel">アーモンド</span>
+                            </div>
+                            <div class="flavor-segment hazelnut" data-flavor="hazelnut" style="--start: 240deg; --end: 264deg;">
+                                <span class="flavor-sublabel">ヘーゼルナッツ</span>
+                            </div>
+                            <div class="flavor-segment walnut" data-flavor="walnut" style="--start: 264deg; --end: 288deg;">
+                                <span class="flavor-sublabel">ウォルナッツ</span>
+                            </div>
+                            
+                            <!-- Earthy subcategories -->
+                            <div class="flavor-segment woody" data-flavor="woody" style="--start: 288deg; --end: 312deg;">
+                                <span class="flavor-sublabel">ウッディー</span>
+                            </div>
+                            <div class="flavor-segment herbal" data-flavor="herbal" style="--start: 312deg; --end: 336deg;">
+                                <span class="flavor-sublabel">ハーバル</span>
+                            </div>
+                            <div class="flavor-segment spicy" data-flavor="spicy" style="--start: 336deg; --end: 360deg;">
+                                <span class="flavor-sublabel">スパイシー</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flavor-info" id="flavorInfo">
+                        <h4>フレーバーを選択してください</h4>
+                        <p>ホイール上のフレーバーをクリックすると、詳細な説明が表示されます。</p>
+                    </div>
+                </div>
+
+                <!-- Tasting Notes Form -->
+                <div class="tasting-notes-container">
+                    <h3>テイスティングノート</h3>
+                    <p class="tasting-description">あなたの味覚体験を記録しましょう</p>
+                    
+                    <div class="tasting-form">
+                        <div class="coffee-selector">
+                            <label for="coffee-select">コーヒー選択:</label>
+                            <select id="coffee-select">
+                                <option value="">コーヒーを選択してください</option>
+                                <option value="ethiopia">エチオピア イルガチェフェ</option>
+                                <option value="colombia">コロンビア ウイラ</option>
+                                <option value="rwanda">ルワンダ ムサンゼ</option>
+                                <option value="brazil">ブラジル セラード</option>
+                                <option value="guatemala">グアテマラ アンティグア</option>
+                                <option value="kenya">ケニア AA</option>
+                            </select>
+                        </div>
+
+                        <div class="taste-attributes">
+                            <div class="attribute-group">
+                                <label>酸味:</label>
+                                <div class="rating-slider">
+                                    <input type="range" id="acidity" min="1" max="10" value="5" class="slider">
+                                    <div class="slider-labels">
+                                        <span>弱い</span>
+                                        <span id="acidity-value">5</span>
+                                        <span>強い</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="attribute-group">
+                                <label>苦味:</label>
+                                <div class="rating-slider">
+                                    <input type="range" id="bitterness" min="1" max="10" value="5" class="slider">
+                                    <div class="slider-labels">
+                                        <span>弱い</span>
+                                        <span id="bitterness-value">5</span>
+                                        <span>強い</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="attribute-group">
+                                <label>甘み:</label>
+                                <div class="rating-slider">
+                                    <input type="range" id="sweetness" min="1" max="10" value="5" class="slider">
+                                    <div class="slider-labels">
+                                        <span>弱い</span>
+                                        <span id="sweetness-value">5</span>
+                                        <span>強い</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="attribute-group">
+                                <label>ボディ:</label>
+                                <div class="rating-slider">
+                                    <input type="range" id="body" min="1" max="10" value="5" class="slider">
+                                    <div class="slider-labels">
+                                        <span>ライト</span>
+                                        <span id="body-value">5</span>
+                                        <span>フル</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="attribute-group">
+                                <label>香り:</label>
+                                <div class="rating-slider">
+                                    <input type="range" id="aroma" min="1" max="10" value="5" class="slider">
+                                    <div class="slider-labels">
+                                        <span>弱い</span>
+                                        <span id="aroma-value">5</span>
+                                        <span>強い</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flavor-selection">
+                            <label>検出されたフレーバー:</label>
+                            <div class="selected-flavors" id="selectedFlavors">
+                                <p class="no-flavors">フレーバーホイールからフレーバーを選択してください</p>
+                            </div>
+                        </div>
+
+                        <div class="tasting-notes-text">
+                            <label for="notes">テイスティングノート:</label>
+                            <textarea id="notes" placeholder="コーヒーの印象、感想、特記事項などを記録してください..."></textarea>
+                        </div>
+
+                        <div class="rating-overall">
+                            <label>総合評価:</label>
+                            <div class="star-rating" id="starRating">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="save-tasting-btn" onclick="saveTastingNote()">テイスティングノートを保存</button>
+                            <button type="button" class="clear-form-btn" onclick="clearTastingForm()">フォームクリア</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved Tasting Notes -->
+            <div class="saved-notes-section">
+                <h3>保存されたテイスティングノート</h3>
+                <div class="notes-grid" id="savedNotes">
+                    <p class="no-saved-notes">まだ保存されたテイスティングノートはありません。</p>
+                </div>
+            </div>
+
+            <!-- Coffee Profiles -->
+            <div class="coffee-profiles-section">
+                <h3>商品別テイスティングプロファイル</h3>
+                <div class="profiles-grid">
+                    <div class="coffee-profile" data-coffee="ethiopia">
+                        <h4>エチオピア イルガチェフェ</h4>
+                        <div class="profile-chart">
+                            <div class="profile-attribute">
+                                <span>酸味</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 90%;"></div>
+                                </div>
+                                <span>9</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>苦味</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 30%;"></div>
+                                </div>
+                                <span>3</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>甘み</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 70%;"></div>
+                                </div>
+                                <span>7</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>ボディ</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 50%;"></div>
+                                </div>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div class="profile-flavors">
+                            <span class="flavor-tag fruity">ベリー</span>
+                            <span class="flavor-tag floral">フローラル</span>
+                            <span class="flavor-tag fruity">柑橘</span>
+                        </div>
+                        <p class="profile-description">明るい酸味とベリーのような果実味が特徴。ジャスミンのような花の香りも感じられます。</p>
+                    </div>
+
+                    <div class="coffee-profile" data-coffee="colombia">
+                        <h4>コロンビア ウイラ</h4>
+                        <div class="profile-chart">
+                            <div class="profile-attribute">
+                                <span>酸味</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 60%;"></div>
+                                </div>
+                                <span>6</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>苦味</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 50%;"></div>
+                                </div>
+                                <span>5</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>甘み</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 80%;"></div>
+                                </div>
+                                <span>8</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>ボディ</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 70%;"></div>
+                                </div>
+                                <span>7</span>
+                            </div>
+                        </div>
+                        <div class="profile-flavors">
+                            <span class="flavor-tag sweet">チョコレート</span>
+                            <span class="flavor-tag sweet">キャラメル</span>
+                            <span class="flavor-tag nutty">ナッツ</span>
+                        </div>
+                        <p class="profile-description">バランスの良い味わいで、チョコレートとキャラメルの甘い香りが印象的。</p>
+                    </div>
+
+                    <div class="coffee-profile" data-coffee="rwanda">
+                        <h4>ルワンダ ムサンゼ</h4>
+                        <div class="profile-chart">
+                            <div class="profile-attribute">
+                                <span>酸味</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 80%;"></div>
+                                </div>
+                                <span>8</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>苦味</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 40%;"></div>
+                                </div>
+                                <span>4</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>甘み</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 75%;"></div>
+                                </div>
+                                <span>7.5</span>
+                            </div>
+                            <div class="profile-attribute">
+                                <span>ボディ</span>
+                                <div class="profile-bar">
+                                    <div class="profile-fill" style="width: 60%;"></div>
+                                </div>
+                                <span>6</span>
+                            </div>
+                        </div>
+                        <div class="profile-flavors">
+                            <span class="flavor-tag fruity">赤いベリー</span>
+                            <span class="flavor-tag floral">ローズ</span>
+                            <span class="flavor-tag sweet">ハニー</span>
+                        </div>
+                        <p class="profile-description">エレガントな酸味と赤いベリーの風味。ローズヒップのような上品な香り。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origin Stories & Farm Information Section -->
+    <section class="origin-stories" id="origins">
+        <div class="container">
+            <h2 class="section-title">産地ストーリー</h2>
+            <p class="section-subtitle">世界のコーヒー産地を旅して、農園と生産者の物語を知る</p>
+            
+            <!-- Interactive World Map -->
+            <div class="world-map-container">
+                <h3>コーヒーベルト - 世界のコーヒー産地</h3>
+                <div class="coffee-world-map" id="coffeeWorldMap">
+                    <svg viewBox="0 0 1000 500" class="map-svg">
+                        <!-- Coffee Belt Background -->
+                        <rect x="0" y="150" width="1000" height="200" fill="rgba(139, 69, 19, 0.1)" class="coffee-belt"/>
+                        <text x="500" y="140" text-anchor="middle" class="belt-label">コーヒーベルト（北緯25度〜南緯25度）</text>
+                        
+                        <!-- Country Regions (Simplified) -->
+                        <!-- Ethiopia -->
+                        <circle cx="580" cy="280" r="20" class="origin-marker" data-country="ethiopia">
+                            <animate attributeName="r" values="20;25;20" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="580" y="320" text-anchor="middle" class="origin-label">エチオピア</text>
+                        
+                        <!-- Colombia -->
+                        <circle cx="250" cy="280" r="20" class="origin-marker" data-country="colombia">
+                            <animate attributeName="r" values="20;25;20" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="250" y="320" text-anchor="middle" class="origin-label">コロンビア</text>
+                        
+                        <!-- Rwanda -->
+                        <circle cx="560" cy="300" r="18" class="origin-marker" data-country="rwanda">
+                            <animate attributeName="r" values="18;23;18" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="560" y="340" text-anchor="middle" class="origin-label">ルワンダ</text>
+                        
+                        <!-- Brazil -->
+                        <circle cx="320" cy="320" r="22" class="origin-marker" data-country="brazil">
+                            <animate attributeName="r" values="22;27;22" dur="2.2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="320" y="360" text-anchor="middle" class="origin-label">ブラジル</text>
+                        
+                        <!-- Guatemala -->
+                        <circle cx="200" cy="240" r="19" class="origin-marker" data-country="guatemala">
+                            <animate attributeName="r" values="19;24;19" dur="2.8s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="200" y="280" text-anchor="middle" class="origin-label">グアテマラ</text>
+                        
+                        <!-- Kenya -->
+                        <circle cx="600" cy="300" r="21" class="origin-marker" data-country="kenya">
+                            <animate attributeName="r" values="21;26;21" dur="2.3s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="600" y="340" text-anchor="middle" class="origin-label">ケニア</text>
+                    </svg>
+                </div>
+                
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <div class="legend-marker"></div>
+                        <span>クリックして詳細を表示</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Country Information Display -->
+            <div class="country-info-display" id="countryInfoDisplay">
+                <div class="default-info">
+                    <h3>産地を選択してください</h3>
+                    <p>地図上のマーカーをクリックすると、その産地の詳細情報が表示されます。</p>
+                </div>
+            </div>
+
+            <!-- Origin Stories Grid -->
+            <div class="origin-stories-grid">
+                <!-- Ethiopia Story -->
+                <article class="origin-story" data-country="ethiopia">
+                    <div class="story-image">
+                        <div class="image-placeholder ethiopia-bg">
+                            <span class="country-flag">🇪🇹</span>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-header">
+                            <h3>エチオピア - コーヒー発祥の地</h3>
+                            <div class="story-meta">
+                                <span class="altitude">標高: 1,500-2,200m</span>
+                                <span class="process">精製: ナチュラル・ウォッシュド</span>
+                            </div>
+                        </div>
+                        
+                        <div class="story-text">
+                            <p>コーヒーの発祥地とされるエチオピア。伝説では、羊飼いのカルディが踊る山羊を見て、赤い実を発見したのが始まりとされています。</p>
+                            
+                            <p>イルガチェフェ地域は、エチオピア南部の高地に位置し、火山性土壌と理想的な気候条件により、世界最高品質のコーヒーを生産しています。</p>
+                        </div>
+                        
+                        <div class="farm-details">
+                            <h4>🏔️ 農園情報</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <strong>地域:</strong>
+                                    <span>イルガチェフェ</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>品種:</strong>
+                                    <span>エチオピア在来種</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>収穫期:</strong>
+                                    <span>10月-1月</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>生産者:</strong>
+                                    <span>小規模農家組合</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sustainability-info">
+                            <h4>🌱 持続可能性</h4>
+                            <div class="sustainability-tags">
+                                <span class="tag organic">オーガニック認証</span>
+                                <span class="tag fair-trade">フェアトレード</span>
+                                <span class="tag bird-friendly">バードフレンドリー</span>
+                            </div>
+                            <p>環境に配慮した栽培方法で、野鳥の住処を守りながら高品質なコーヒーを生産しています。</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Colombia Story -->
+                <article class="origin-story" data-country="colombia">
+                    <div class="story-image">
+                        <div class="image-placeholder colombia-bg">
+                            <span class="country-flag">🇨🇴</span>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-header">
+                            <h3>コロンビア - アンデス山脈の宝石</h3>
+                            <div class="story-meta">
+                                <span class="altitude">標高: 1,200-2,000m</span>
+                                <span class="process">精製: ウォッシュド</span>
+                            </div>
+                        </div>
+                        
+                        <div class="story-text">
+                            <p>南米コロンビアのウイラ県は、アンデス山脈の雄大な自然に囲まれた美しいコーヒー産地です。昼夜の寒暖差が大きく、火山性土壌が豊富なこの地域は、コーヒー栽培に理想的な環境を提供しています。</p>
+                            
+                            <p>家族経営の小規模農園が多く、代々受け継がれた伝統的な栽培方法と現代の技術を融合し、品質の高いコーヒーを生産しています。</p>
+                        </div>
+                        
+                        <div class="farm-details">
+                            <h4>🏔️ 農園情報</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <strong>地域:</strong>
+                                    <span>ウイラ県</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>品種:</strong>
+                                    <span>カツーラ、コロンビア</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>収穫期:</strong>
+                                    <span>4月-6月、10月-12月</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>生産者:</strong>
+                                    <span>ファミリーファーム</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sustainability-info">
+                            <h4>🌱 持続可能性</h4>
+                            <div class="sustainability-tags">
+                                <span class="tag rainforest">レインフォレスト認証</span>
+                                <span class="tag fair-trade">フェアトレード</span>
+                                <span class="tag women">女性支援プログラム</span>
+                            </div>
+                            <p>女性生産者の支援と環境保護を重視し、次世代に美しい自然を残す取り組みを行っています。</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Rwanda Story -->
+                <article class="origin-story" data-country="rwanda">
+                    <div class="story-image">
+                        <div class="image-placeholder rwanda-bg">
+                            <span class="country-flag">🇷🇼</span>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-header">
+                            <h3>ルワンダ - 千の丘の復活</h3>
+                            <div class="story-meta">
+                                <span class="altitude">標高: 1,700-2,000m</span>
+                                <span class="process">精製: ウォッシュド</span>
+                            </div>
+                        </div>
+                        
+                        <div class="story-text">
+                            <p>「千の丘の国」と呼ばれるルワンダ。1990年代の困難な時代を乗り越え、コーヒー産業の再建と品質向上に取り組んできました。</p>
+                            
+                            <p>ムサンゼ地域の女性生産者協同組合では、品質の向上と地域社会の発展を目指し、一粒一粒丁寧に手摘みで収穫されたコーヒーチェリーを、伝統的な水洗処理で丁寧に精製しています。</p>
+                        </div>
+                        
+                        <div class="farm-details">
+                            <h4>🏔️ 農園情報</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <strong>地域:</strong>
+                                    <span>ムサンゼ</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>品種:</strong>
+                                    <span>ブルボン</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>収穫期:</strong>
+                                    <span>3月-7月</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>生産者:</strong>
+                                    <span>女性生産者協同組合</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sustainability-info">
+                            <h4>🌱 持続可能性</h4>
+                            <div class="sustainability-tags">
+                                <span class="tag organic">オーガニック栽培</span>
+                                <span class="tag fair-trade">フェアトレード</span>
+                                <span class="tag community">コミュニティ支援</span>
+                            </div>
+                            <p>女性の社会参加促進と教育支援を通じて、持続可能なコミュニティづくりに貢献しています。</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Processing Methods Section -->
+            <div class="processing-methods-section">
+                <h3>精製方法の違い</h3>
+                <p class="processing-intro">コーヒーの味わいは、産地だけでなく精製方法によっても大きく変わります。</p>
+                
+                <div class="processing-methods-grid">
+                    <div class="processing-method">
+                        <div class="method-icon">🌊</div>
+                        <h4>ウォッシュド（水洗式）</h4>
+                        <div class="method-process">
+                            <div class="process-step">
+                                <span class="step-number">1</span>
+                                <span>果肉除去</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">2</span>
+                                <span>発酵槽で12-48時間</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">3</span>
+                                <span>水洗い</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">4</span>
+                                <span>天日乾燥</span>
+                            </div>
+                        </div>
+                        <div class="method-characteristics">
+                            <strong>特徴:</strong> クリーンで明るい酸味、豆本来の風味が際立つ
+                        </div>
+                        <div class="method-countries">
+                            <strong>主な産地:</strong> コロンビア、ルワンダ、ケニア
+                        </div>
+                    </div>
+
+                    <div class="processing-method">
+                        <div class="method-icon">☀️</div>
+                        <h4>ナチュラル（自然乾燥式）</h4>
+                        <div class="method-process">
+                            <div class="process-step">
+                                <span class="step-number">1</span>
+                                <span>チェリーのまま選別</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">2</span>
+                                <span>天日で2-4週間乾燥</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">3</span>
+                                <span>果肉・パーチメント除去</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">4</span>
+                                <span>生豆の完成</span>
+                            </div>
+                        </div>
+                        <div class="method-characteristics">
+                            <strong>特徴:</strong> フルーティーで甘みが強い、ボディが豊か
+                        </div>
+                        <div class="method-countries">
+                            <strong>主な産地:</strong> エチオピア、ブラジル、イエメン
+                        </div>
+                    </div>
+
+                    <div class="processing-method">
+                        <div class="method-icon">🍯</div>
+                        <h4>ハニープロセス</h4>
+                        <div class="method-process">
+                            <div class="process-step">
+                                <span class="step-number">1</span>
+                                <span>果肉除去（ミューシレージ残す）</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">2</span>
+                                <span>ミューシレージ付きで乾燥</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">3</span>
+                                <span>定期的な撹拌</span>
+                            </div>
+                            <div class="process-step">
+                                <span class="step-number">4</span>
+                                <span>パーチメント除去</span>
+                            </div>
+                        </div>
+                        <div class="method-characteristics">
+                            <strong>特徴:</strong> ウォッシュドとナチュラルの中間、甘みと酸味のバランス
+                        </div>
+                        <div class="method-countries">
+                            <strong>主な産地:</strong> コスタリカ、ブラジル、エルサルバドル
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seasonal Coffee Calendar -->
+            <div class="seasonal-calendar-section">
+                <h3>収穫カレンダー</h3>
+                <p class="calendar-intro">世界各地のコーヒーは、それぞれ異なる時期に収穫されます。新鮮なコーヒーをお楽しみいただくための収穫スケジュールです。</p>
+                
+                <div class="harvest-calendar">
+                    <div class="calendar-month-grid">
+                        <div class="month-header">1月</div>
+                        <div class="month-header">2月</div>
+                        <div class="month-header">3月</div>
+                        <div class="month-header">4月</div>
+                        <div class="month-header">5月</div>
+                        <div class="month-header">6月</div>
+                        <div class="month-header">7月</div>
+                        <div class="month-header">8月</div>
+                        <div class="month-header">9月</div>
+                        <div class="month-header">10月</div>
+                        <div class="month-header">11月</div>
+                        <div class="month-header">12月</div>
+                        
+                        <!-- Ethiopia -->
+                        <div class="country-row" data-country="ethiopia">
+                            <div class="country-name">エチオピア</div>
+                            <div class="harvest-bar" style="grid-column: 10 / 13; background: linear-gradient(135deg, #FF6B9D, #FF8E9B);"></div>
+                        </div>
+                        
+                        <!-- Colombia -->
+                        <div class="country-row" data-country="colombia">
+                            <div class="country-name">コロンビア</div>
+                            <div class="harvest-bar" style="grid-column: 4 / 7; background: linear-gradient(135deg, #A0522D, #D2B48C);"></div>
+                            <div class="harvest-bar" style="grid-column: 10 / 13; background: linear-gradient(135deg, #A0522D, #D2B48C);"></div>
+                        </div>
+                        
+                        <!-- Rwanda -->
+                        <div class="country-row" data-country="rwanda">
+                            <div class="country-name">ルワンダ</div>
+                            <div class="harvest-bar" style="grid-column: 3 / 8; background: linear-gradient(135deg, #E8A0C0, #F5B0E8);"></div>
+                        </div>
+                        
+                        <!-- Brazil -->
+                        <div class="country-row" data-country="brazil">
+                            <div class="country-name">ブラジル</div>
+                            <div class="harvest-bar" style="grid-column: 5 / 10; background: linear-gradient(135deg, #8B4513, #CD853F);"></div>
+                        </div>
+                        
+                        <!-- Guatemala -->
+                        <div class="country-row" data-country="guatemala">
+                            <div class="country-name">グアテマラ</div>
+                            <div class="harvest-bar" style="grid-column: 12 / 15; background: linear-gradient(135deg, #556B2F, #9ACD32);"></div>
+                        </div>
+                        
+                        <!-- Kenya -->
+                        <div class="country-row" data-country="kenya">
+                            <div class="country-name">ケニア</div>
+                            <div class="harvest-bar" style="grid-column: 10 / 13; background: linear-gradient(135deg, #DC143C, #FF69B4);"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-bar"></div>
+                            <span>収穫期間</span>
+                        </div>
+                        <div class="legend-note">
+                            * 気候や農園により収穫時期は前後することがあります
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3538,8 +6713,894 @@ ${cartSystem.cart.map(item => `${item.name} x${item.quantity} - ¥${(item.price 
             }, 10000);
         }
         
+        // Brewing Guide Interactive Features
+        const brewingSystem = {
+            timers: {
+                drip: null,
+                french: null,
+                espresso: null,
+                pour: null
+            },
+            timerStates: {
+                drip: { time: 0, target: 240, running: false }, // 4 minutes
+                french: { time: 240, target: 240, running: false }, // 4 minutes countdown
+                espresso: { time: 0, target: 25, running: false }, // 25 seconds
+                pour: { time: 0, target: 150, running: false } // 2.5 minutes
+            }
+        };
+
+        function switchBrewingMethod(method) {
+            // Remove active class from all buttons and guides
+            document.querySelectorAll('.method-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.method-guide').forEach(guide => guide.classList.remove('active'));
+            
+            // Add active class to selected button and guide
+            event.target.classList.add('active');
+            document.getElementById(method + '-guide').classList.add('active');
+            
+            // Reset all timers when switching methods
+            Object.keys(brewingSystem.timers).forEach(key => {
+                if (brewingSystem.timers[key]) {
+                    clearInterval(brewingSystem.timers[key]);
+                    brewingSystem.timers[key] = null;
+                }
+                brewingSystem.timerStates[key].running = false;
+                updateTimerButton(key, false);
+            });
+            
+            resetTimer();
+        }
+
+        function toggleTimer(method) {
+            const state = brewingSystem.timerStates[method];
+            
+            if (state.running) {
+                // Stop timer
+                clearInterval(brewingSystem.timers[method]);
+                brewingSystem.timers[method] = null;
+                state.running = false;
+                updateTimerButton(method, false);
+            } else {
+                // Start timer
+                state.running = true;
+                updateTimerButton(method, true);
+                
+                brewingSystem.timers[method] = setInterval(() => {
+                    if (method === 'french') {
+                        // French press counts down
+                        state.time--;
+                        if (state.time <= 0) {
+                            state.time = 0;
+                            clearInterval(brewingSystem.timers[method]);
+                            brewingSystem.timers[method] = null;
+                            state.running = false;
+                            updateTimerButton(method, false);
+                            showBrewingAlert('フレンチプレスの抽出完了！プランジャーをゆっくり押してください。');
+                        }
+                    } else {
+                        // Other methods count up
+                        state.time++;
+                        if (state.time >= state.target) {
+                            clearInterval(brewingSystem.timers[method]);
+                            brewingSystem.timers[method] = null;
+                            state.running = false;
+                            updateTimerButton(method, false);
+                            
+                            let message = '';
+                            switch(method) {
+                                case 'drip':
+                                    message = 'ドリップコーヒーの抽出完了！美味しいコーヒーをお楽しみください。';
+                                    break;
+                                case 'espresso':
+                                    message = 'エスプレッソの抽出完了！美しいクレマができましたか？';
+                                    break;
+                                case 'pour':
+                                    message = 'ハンドドリップの抽出完了！香り高いコーヒーの出来上がりです。';
+                                    break;
+                            }
+                            showBrewingAlert(message);
+                        }
+                    }
+                    
+                    updateTimerDisplay(method);
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            // Reset all timers to initial state
+            brewingSystem.timerStates.drip.time = 0;
+            brewingSystem.timerStates.french.time = 240;
+            brewingSystem.timerStates.espresso.time = 0;
+            brewingSystem.timerStates.pour.time = 0;
+            
+            // Stop all running timers
+            Object.keys(brewingSystem.timers).forEach(key => {
+                if (brewingSystem.timers[key]) {
+                    clearInterval(brewingSystem.timers[key]);
+                    brewingSystem.timers[key] = null;
+                }
+                brewingSystem.timerStates[key].running = false;
+                updateTimerButton(key, false);
+                updateTimerDisplay(key);
+            });
+        }
+
+        function updateTimerDisplay(method) {
+            const state = brewingSystem.timerStates[method];
+            const minutes = Math.floor(state.time / 60);
+            const seconds = state.time % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const timerElement = document.getElementById(`timer${method === 'drip' ? '' : '-' + method}`);
+            if (timerElement) {
+                timerElement.textContent = timeString;
+            }
+        }
+
+        function updateTimerButton(method, isRunning) {
+            const button = document.querySelector(`[onclick="toggleTimer('${method}')"]`);
+            if (button) {
+                if (isRunning) {
+                    button.textContent = 'ストップ';
+                    button.classList.add('active');
+                } else {
+                    button.textContent = 'スタート';
+                    button.classList.remove('active');
+                }
+            }
+        }
+
+        function showBrewingAlert(message) {
+            const alert = document.createElement('div');
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--primary-navy), var(--navy-accent));
+                color: white;
+                padding: 1.5rem 2rem;
+                border-radius: 15px;
+                z-index: 10001;
+                max-width: 350px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                animation: slideInRight 0.5s ease-out;
+                font-family: 'Noto Serif JP', serif;
+            `;
+            
+            alert.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <span style="font-size: 1.5rem;">☕</span>
+                    <div>
+                        <p style="margin: 0; font-weight: 600;">${message}</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; margin-left: auto;">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                if (alert.parentElement) {
+                    alert.remove();
+                }
+            }, 5000);
+        }
+
+        // Add CSS for the alert animation
+        const alertStyles = document.createElement('style');
+        alertStyles.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(alertStyles);
+
+        // Add event listeners for brewing method buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize brewing guide functionality
+            const methodButtons = document.querySelectorAll('.method-btn');
+            methodButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const method = this.getAttribute('data-method');
+                    switchBrewingMethod(method);
+                });
+            });
+
+            // Initialize timer displays
+            Object.keys(brewingSystem.timerStates).forEach(method => {
+                updateTimerDisplay(method);
+            });
+        });
+
+        // Tasting System
+        const tastingSystem = {
+            selectedFlavors: [],
+            currentRating: 0,
+            savedNotes: JSON.parse(localStorage.getItem('kono_kaffe_tasting_notes') || '[]'),
+            
+            flavorData: {
+                // Fruity category
+                berry: { category: 'fruity', name: 'ベリー', description: 'ブルーベリー、ラズベリー、ストロベリーなどのベリー系の甘酸っぱい風味。アントシアニンによる鮮やかな味わいが特徴。' },
+                citrus: { category: 'fruity', name: '柑橘', description: 'レモン、オレンジ、グレープフルーツなどの爽やかな酸味。クエン酸による明るく活気のある風味。' },
+                'stone-fruit': { category: 'fruity', name: '核果類', description: '桃、杏、プラム、チェリーなどの甘くジューシーな果実の風味。豊潤で複雑な甘みが魅力。' },
+                
+                // Floral category
+                jasmine: { category: 'floral', name: 'ジャスミン', description: '上品で優雅な花の香り、特にジャスミンの甘い芳香。エレガントで洗練された香りのプロフィール。' },
+                rose: { category: 'floral', name: 'ローズ', description: 'バラの花びらのような上品で華やかな香り。ロマンチックで繊細な花の香りが印象的。' },
+                lavender: { category: 'floral', name: 'ラベンダー', description: 'ハーブ系の爽やかな花の香り。リラックス効果のある穏やかで心地よい香り。' },
+                
+                // Sweet category
+                chocolate: { category: 'sweet', name: 'チョコレート', description: 'ダークチョコレートやミルクチョコレートの甘い風味。カカオの深みとバニラの甘さが融合。' },
+                caramel: { category: 'sweet', name: 'キャラメル', description: '焦がした砂糖の甘く香ばしい風味。メイラード反応による複雑で豊かな甘み。' },
+                honey: { category: 'sweet', name: 'ハニー', description: 'はちみつのような自然な甘さと複雑な風味。花の蜜による純粋で上品な甘み。' },
+                
+                // Nutty category
+                almond: { category: 'nutty', name: 'アーモンド', description: 'アーモンドの香ばしく上品なナッツの風味。マルチパンやアマレットのような優雅な香り。' },
+                hazelnut: { category: 'nutty', name: 'ヘーゼルナッツ', description: 'ヘーゼルナッツの濃厚でクリーミーな風味。ヌテラやプラリネのような贅沢な味わい。' },
+                walnut: { category: 'nutty', name: 'ウォルナッツ', description: 'クルミの豊かで複雑なナッツの風味。オメガ脂肪酸による深いコクと風味。' },
+                
+                // Earthy category
+                woody: { category: 'earthy', name: 'ウッディー', description: '木や樹皮のような自然で落ち着いた風味。セダーやオークのような温かみのある香り。' },
+                herbal: { category: 'earthy', name: 'ハーバル', description: 'ハーブや草原のような爽やかで緑の風味。タイム、ローズマリー、セージなどの複雑な香り。' },
+                spicy: { category: 'earthy', name: 'スパイシー', description: 'スパイスのような温かく刺激的な風味。シナモン、クローブ、ナツメグなどの豊かなスパイス感。' }
+            }
+        };
+
+        function initializeTastingSystem() {
+            // Initialize flavor wheel interactions
+            const flavorSegments = document.querySelectorAll('.flavor-segment[data-flavor]');
+            flavorSegments.forEach(segment => {
+                segment.addEventListener('click', function() {
+                    const flavor = this.getAttribute('data-flavor');
+                    selectFlavor(flavor);
+                });
+            });
+
+            // Initialize star rating
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    setStarRating(rating);
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(rating);
+                });
+            });
+
+            // Reset star highlight on mouse leave
+            document.getElementById('starRating').addEventListener('mouseleave', function() {
+                highlightStars(tastingSystem.currentRating);
+            });
+
+            // Initialize sliders
+            const sliders = document.querySelectorAll('.slider');
+            sliders.forEach(slider => {
+                slider.addEventListener('input', function() {
+                    const valueDisplay = document.getElementById(this.id + '-value');
+                    if (valueDisplay) {
+                        valueDisplay.textContent = this.value;
+                    }
+                });
+            });
+
+            // Load saved notes
+            displaySavedNotes();
+        }
+
+        function selectFlavor(flavorKey) {
+            const flavorData = tastingSystem.flavorData[flavorKey];
+            if (!flavorData) return;
+
+            // Visual feedback: highlight selected segment
+            const allSegments = document.querySelectorAll('.flavor-segment[data-flavor]');
+            allSegments.forEach(seg => seg.classList.remove('selected'));
+            
+            const selectedSegment = document.querySelector(`.flavor-segment[data-flavor="${flavorKey}"]`);
+            if (selectedSegment) {
+                selectedSegment.classList.add('selected');
+                
+                // Add a subtle animation effect
+                selectedSegment.style.animation = 'none';
+                setTimeout(() => {
+                    selectedSegment.style.animation = 'flavorPulse 0.6s ease-out';
+                }, 10);
+            }
+
+            // Update flavor info display with enhanced styling
+            const flavorInfo = document.getElementById('flavorInfo');
+            flavorInfo.innerHTML = `
+                <div class="flavor-detail">
+                    <h4 class="flavor-name">${flavorData.name}</h4>
+                    <span class="flavor-category">${getCategoryDisplayName(flavorData.category)}</span>
+                    <p class="flavor-description">${flavorData.description}</p>
+                </div>
+            `;
+
+            // Add to selected flavors if not already selected
+            const existingFlavor = tastingSystem.selectedFlavors.find(f => f.key === flavorKey);
+            if (!existingFlavor) {
+                tastingSystem.selectedFlavors.push({
+                    key: flavorKey,
+                    name: flavorData.name,
+                    category: flavorData.category
+                });
+                updateSelectedFlavorsDisplay();
+            }
+        }
+
+        function getCategoryDisplayName(category) {
+            const categoryNames = {
+                'fruity': 'フルーティー',
+                'floral': 'フローラル', 
+                'sweet': 'スイート',
+                'nutty': 'ナッティー',
+                'earthy': 'アーシー'
+            };
+            return categoryNames[category] || category;
+        }
+
+        function updateSelectedFlavorsDisplay() {
+            const selectedFlavorsContainer = document.getElementById('selectedFlavors');
+            
+            if (tastingSystem.selectedFlavors.length === 0) {
+                selectedFlavorsContainer.innerHTML = '<p class="no-flavors">フレーバーホイールからフレーバーを選択してください</p>';
+                return;
+            }
+
+            selectedFlavorsContainer.innerHTML = tastingSystem.selectedFlavors.map(flavor => 
+                `<span class="flavor-tag ${flavor.category}" onclick="removeFlavor('${flavor.key}')">${flavor.name} ×</span>`
+            ).join('');
+        }
+
+        function removeFlavor(flavorKey) {
+            tastingSystem.selectedFlavors = tastingSystem.selectedFlavors.filter(f => f.key !== flavorKey);
+            updateSelectedFlavorsDisplay();
+        }
+
+        function setStarRating(rating) {
+            tastingSystem.currentRating = rating;
+            highlightStars(rating);
+        }
+
+        function highlightStars(rating) {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function saveTastingNote() {
+            const coffeeSelect = document.getElementById('coffee-select');
+            const notesText = document.getElementById('notes');
+            
+            if (!coffeeSelect.value) {
+                alert('コーヒーを選択してください。');
+                return;
+            }
+
+            const tastingNote = {
+                id: Date.now(),
+                coffee: coffeeSelect.value,
+                coffeeName: coffeeSelect.options[coffeeSelect.selectedIndex].text,
+                date: new Date().toLocaleDateString('ja-JP'),
+                attributes: {
+                    acidity: document.getElementById('acidity').value,
+                    bitterness: document.getElementById('bitterness').value,
+                    sweetness: document.getElementById('sweetness').value,
+                    body: document.getElementById('body').value,
+                    aroma: document.getElementById('aroma').value
+                },
+                flavors: [...tastingSystem.selectedFlavors],
+                notes: notesText.value,
+                rating: tastingSystem.currentRating || 1
+            };
+
+            tastingSystem.savedNotes.push(tastingNote);
+            localStorage.setItem('kono_kaffe_tasting_notes', JSON.stringify(tastingSystem.savedNotes));
+            
+            displaySavedNotes();
+            showTastingAlert('テイスティングノートが保存されました！');
+            clearTastingForm();
+        }
+
+        function clearTastingForm() {
+            document.getElementById('coffee-select').value = '';
+            document.getElementById('notes').value = '';
+            
+            // Reset sliders
+            ['acidity', 'bitterness', 'sweetness', 'body', 'aroma'].forEach(attr => {
+                const slider = document.getElementById(attr);
+                const valueDisplay = document.getElementById(attr + '-value');
+                slider.value = 5;
+                if (valueDisplay) valueDisplay.textContent = '5';
+            });
+
+            // Clear selected flavors
+            tastingSystem.selectedFlavors = [];
+            updateSelectedFlavorsDisplay();
+
+            // Reset star rating
+            tastingSystem.currentRating = 0;
+            highlightStars(0);
+
+            // Reset flavor info
+            document.getElementById('flavorInfo').innerHTML = `
+                <h4>フレーバーを選択してください</h4>
+                <p>ホイール上のフレーバーをクリックすると、詳細な説明が表示されます。</p>
+            `;
+        }
+
+        function displaySavedNotes() {
+            const savedNotesContainer = document.getElementById('savedNotes');
+            
+            if (tastingSystem.savedNotes.length === 0) {
+                savedNotesContainer.innerHTML = '<p class="no-saved-notes">まだ保存されたテイスティングノートはありません。</p>';
+                return;
+            }
+
+            const notesHTML = tastingSystem.savedNotes
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .map(note => `
+                    <div class="note-card">
+                        <div class="note-header">
+                            <div class="note-coffee">${note.coffeeName}</div>
+                            <div class="note-date">${note.date}</div>
+                        </div>
+                        <div class="note-attributes">
+                            <div class="note-attribute">
+                                <span>酸味:</span>
+                                <span>${note.attributes.acidity}/10</span>
+                            </div>
+                            <div class="note-attribute">
+                                <span>苦味:</span>
+                                <span>${note.attributes.bitterness}/10</span>
+                            </div>
+                            <div class="note-attribute">
+                                <span>甘み:</span>
+                                <span>${note.attributes.sweetness}/10</span>
+                            </div>
+                            <div class="note-attribute">
+                                <span>ボディ:</span>
+                                <span>${note.attributes.body}/10</span>
+                            </div>
+                        </div>
+                        <div class="note-flavors">
+                            ${note.flavors.map(flavor => `<span class="flavor-tag ${flavor.category}">${flavor.name}</span>`).join('')}
+                        </div>
+                        <div class="note-text">${note.notes || 'ノートなし'}</div>
+                        <div class="note-rating">
+                            ${Array(5).fill().map((_, i) => `<span class="star ${i < note.rating ? 'active' : ''}">★</span>`).join('')}
+                        </div>
+                        <button onclick="deleteTastingNote(${note.id})" style="background: #dc2626; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 1rem;">削除</button>
+                    </div>
+                `).join('');
+
+            savedNotesContainer.innerHTML = notesHTML;
+        }
+
+        function deleteTastingNote(noteId) {
+            if (confirm('このテイスティングノートを削除しますか？')) {
+                tastingSystem.savedNotes = tastingSystem.savedNotes.filter(note => note.id !== noteId);
+                localStorage.setItem('kono_kaffe_tasting_notes', JSON.stringify(tastingSystem.savedNotes));
+                displaySavedNotes();
+                showTastingAlert('テイスティングノートが削除されました。');
+            }
+        }
+
+        function showTastingAlert(message) {
+            const alert = document.createElement('div');
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, var(--primary-navy), var(--navy-accent));
+                color: white;
+                padding: 1.5rem 2rem;
+                border-radius: 15px;
+                z-index: 10001;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                animation: slideInDown 0.5s ease-out;
+                font-family: 'Noto Serif JP', serif;
+            `;
+            
+            alert.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <span style="font-size: 1.5rem;">✨</span>
+                    <p style="margin: 0; font-weight: 600;">${message}</p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; margin-left: auto;">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                if (alert.parentElement) {
+                    alert.remove();
+                }
+            }, 3000);
+        }
+
+        // Add animation CSS
+        const tastingAnimationStyles = document.createElement('style');
+        tastingAnimationStyles.textContent = `
+            @keyframes slideInDown {
+                from {
+                    transform: translateX(-50%) translateY(-100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(-50%) translateY(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(tastingAnimationStyles);
+
+        // Origin Stories System
+        const originSystem = {
+            countryData: {
+                ethiopia: {
+                    name: 'エチオピア',
+                    fullName: 'エチオピア イルガチェフェ',
+                    altitude: '1,500-2,200m',
+                    process: 'ナチュラル・ウォッシュド',
+                    region: 'イルガチェフェ',
+                    variety: 'エチオピア在来種',
+                    harvest: '10月-1月',
+                    producer: '小規模農家組合',
+                    flavor: 'ベリー、フローラル、明るい酸味',
+                    description: 'コーヒー発祥の地。羊飼いカルディの伝説から始まる、世界最古のコーヒー文化を持つ国です。',
+                    sustainability: ['オーガニック認証', 'フェアトレード', 'バードフレンドリー']
+                },
+                colombia: {
+                    name: 'コロンビア',
+                    fullName: 'コロンビア ウイラ',
+                    altitude: '1,200-2,000m',
+                    process: 'ウォッシュド',
+                    region: 'ウイラ県',
+                    variety: 'カツーラ、コロンビア',
+                    harvest: '4月-6月、10月-12月',
+                    producer: 'ファミリーファーム',
+                    flavor: 'チョコレート、キャラメル、バランス',
+                    description: 'アンデス山脈の恵まれた自然環境で、家族経営の農園が高品質なコーヒーを生産しています。',
+                    sustainability: ['レインフォレスト認証', 'フェアトレード', '女性支援プログラム']
+                },
+                rwanda: {
+                    name: 'ルワンダ',
+                    fullName: 'ルワンダ ムサンゼ',
+                    altitude: '1,700-2,000m',
+                    process: 'ウォッシュド',
+                    region: 'ムサンゼ',
+                    variety: 'ブルボン',
+                    harvest: '3月-7月',
+                    producer: '女性生産者協同組合',
+                    flavor: '赤いベリー、ローズ、エレガント',
+                    description: '千の丘の国。困難を乗り越え、女性生産者が中心となって復活した美しいコーヒー産地。',
+                    sustainability: ['オーガニック栽培', 'フェアトレード', 'コミュニティ支援']
+                },
+                brazil: {
+                    name: 'ブラジル',
+                    fullName: 'ブラジル セラード',
+                    altitude: '800-1,200m',
+                    process: 'ナチュラル・ハニー',
+                    region: 'セラード',
+                    variety: 'ムンドノーボ、カツアイ',
+                    harvest: '5月-9月',
+                    producer: '大規模農園',
+                    flavor: 'ナッツ、チョコレート、まろやか',
+                    description: '世界最大のコーヒー生産国。サバンナ気候の広大な農園で機械化された効率的な生産を行います。',
+                    sustainability: ['持続可能農業', 'レインフォレスト認証', '品質向上プログラム']
+                },
+                guatemala: {
+                    name: 'グアテマラ',
+                    fullName: 'グアテマラ アンティグア',
+                    altitude: '1,500-1,700m',
+                    process: 'ウォッシュド',
+                    region: 'アンティグア',
+                    variety: 'ブルボン、カツーラ',
+                    harvest: '12月-3月',
+                    producer: 'ファミリーファーム',
+                    flavor: 'スパイシー、フルボディ、煙味',
+                    description: '火山に囲まれた古都アンティグア。火山灰土壌がユニークな煙のような風味を生み出します。',
+                    sustainability: ['オーガニック認証', 'フェアトレード', '伝統農法']
+                },
+                kenya: {
+                    name: 'ケニア',
+                    fullName: 'ケニア AA',
+                    altitude: '1,400-2,000m',
+                    process: 'ウォッシュド（ケニア式）',
+                    region: 'キリニャガ',
+                    variety: 'SL28、SL34',
+                    harvest: '10月-12月',
+                    producer: '小規模農家協同組合',
+                    flavor: 'ブラックカラント、ワイン、強い酸味',
+                    description: 'ケニア山の肥沃な土壌で育つ、独特の品種と精製方法により生まれる力強い風味が特徴。',
+                    sustainability: ['フェアトレード', '品質向上プログラム', '農家教育支援']
+                }
+            }
+        };
+
+        function initializeOriginSystem() {
+            // Initialize map interactions
+            const originMarkers = document.querySelectorAll('.origin-marker');
+            originMarkers.forEach(marker => {
+                marker.addEventListener('click', function() {
+                    const country = this.getAttribute('data-country');
+                    selectCountry(country);
+                });
+            });
+
+            // Initialize harvest calendar interactions
+            const countryRows = document.querySelectorAll('.country-row');
+            countryRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    const country = this.getAttribute('data-country');
+                    if (country) {
+                        selectCountry(country);
+                        // Scroll to country info
+                        document.getElementById('countryInfoDisplay').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }
+                });
+            });
+        }
+
+        function selectCountry(countryKey) {
+            const countryData = originSystem.countryData[countryKey];
+            if (!countryData) return;
+
+            // Update active states
+            document.querySelectorAll('.origin-marker').forEach(marker => {
+                marker.classList.remove('active');
+            });
+            document.querySelector(`[data-country="${countryKey}"]`).classList.add('active');
+
+            // Update country info display
+            const countryInfoDisplay = document.getElementById('countryInfoDisplay');
+            countryInfoDisplay.innerHTML = `
+                <div class="country-detailed-info">
+                    <div class="info-header">
+                        <h3>${countryData.fullName}</h3>
+                        <div class="country-quick-stats">
+                            <span class="stat-item">🏔️ ${countryData.altitude}</span>
+                            <span class="stat-item">⚗️ ${countryData.process}</span>
+                            <span class="stat-item">📅 ${countryData.harvest}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-content">
+                        <div class="info-section">
+                            <strong>特徴的な風味:</strong>
+                            <span>${countryData.flavor}</span>
+                        </div>
+                        <div class="info-section">
+                            <strong>産地の特色:</strong>
+                            <span>${countryData.description}</span>
+                        </div>
+                        <div class="info-section">
+                            <strong>持続可能性:</strong>
+                            <div class="mini-sustainability-tags">
+                                ${countryData.sustainability.map(tag => `<span class="mini-tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-actions">
+                        <button onclick="scrollToStory('${countryKey}')" class="view-story-btn">詳細ストーリーを見る</button>
+                        <button onclick="scrollToProducts()" class="view-products-btn">商品を見る</button>
+                    </div>
+                </div>
+            `;
+
+            // Add animation
+            countryInfoDisplay.style.animation = 'fadeInUp 0.6s ease-out';
+            setTimeout(() => {
+                countryInfoDisplay.style.animation = '';
+            }, 600);
+        }
+
+        function scrollToStory(countryKey) {
+            const storyElement = document.querySelector(`[data-country="${countryKey}"].origin-story`);
+            if (storyElement) {
+                storyElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Add highlight effect
+                storyElement.style.background = 'rgba(255, 255, 255, 0.12)';
+                setTimeout(() => {
+                    storyElement.style.background = 'rgba(255, 255, 255, 0.05)';
+                }, 2000);
+            }
+        }
+
+        function scrollToProducts() {
+            document.getElementById('coffee').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Add dynamic CSS for country info display
+        const originAnimationStyles = document.createElement('style');
+        originAnimationStyles.textContent = `
+            .country-detailed-info {
+                text-align: left;
+                width: 100%;
+            }
+            
+            .info-header h3 {
+                color: var(--primary-navy);
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+                font-family: 'Playfair Display', serif;
+            }
+            
+            .country-quick-stats {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-bottom: 1.5rem;
+            }
+            
+            .stat-item {
+                background: var(--navy-accent);
+                color: var(--white);
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+            
+            .info-content {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .info-section {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .info-section strong {
+                color: var(--primary-navy);
+                font-weight: 600;
+            }
+            
+            .mini-sustainability-tags {
+                display: flex;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .mini-tag {
+                background: linear-gradient(135deg, var(--navy-accent), var(--primary-navy));
+                color: var(--white);
+                padding: 0.3rem 0.8rem;
+                border-radius: 15px;
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+            
+            .info-actions {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+            }
+            
+            .view-story-btn, .view-products-btn {
+                padding: 1rem 2rem;
+                border: none;
+                border-radius: 25px;
+                font-family: 'Noto Serif JP', serif;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 0.9rem;
+            }
+            
+            .view-story-btn {
+                background: linear-gradient(45deg, var(--primary-navy), var(--navy-accent));
+                color: var(--white);
+            }
+            
+            .view-story-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(15, 23, 42, 0.3);
+            }
+            
+            .view-products-btn {
+                background: var(--white);
+                color: var(--primary-navy);
+                border: 2px solid var(--primary-navy);
+            }
+            
+            .view-products-btn:hover {
+                background: var(--primary-navy);
+                color: var(--white);
+                transform: translateY(-2px);
+            }
+            
+            @media (max-width: 768px) {
+                .country-quick-stats {
+                    flex-direction: column;
+                }
+                
+                .info-actions {
+                    flex-direction: column;
+                }
+            }
+        `;
+        document.head.appendChild(originAnimationStyles);
+
+        // Mobile menu toggle functionality
+        function toggleMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            menuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            menuToggle.classList.remove('active');
+            mobileNav.classList.remove('active');
+        }
+
+        // Initialize mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', toggleMobileMenu);
+            }
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                const menuToggle = document.getElementById('menuToggle');
+                const mobileNav = document.getElementById('mobileNav');
+                
+                if (menuToggle && mobileNav && 
+                    !menuToggle.contains(e.target) && 
+                    !mobileNav.contains(e.target)) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close mobile menu on window resize (optional)
+            // window.addEventListener('resize', function() {
+            //     if (window.innerWidth > 768) {
+            //         closeMobileMenu();
+            //     }
+            // });
+        });
+
         // Initialize product details when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize tasting system
+            initializeTastingSystem();
+            
+            // Initialize origin system
+            initializeOriginSystem();
+            
             // Product details are already initialized
         });
     </script>
